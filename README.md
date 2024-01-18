@@ -1,8 +1,11 @@
-# React + Vite
+# Shopping Cart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A mock e-commerce website built with React demonstrating my skills with:
 
-Currently, two official plugins are available:
+- React Router with `react-router-dom`
+- React testing with `vitest` and `@testing-library/react`
+- Fetching data in React from FakeStore API
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Project requirements can be found on [the Odin Project site](https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart).
+
+👉 [Live Demo](#) 👈
