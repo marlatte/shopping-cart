@@ -6,7 +6,7 @@ import NavMenu from '../NavMenu';
 const onClick = () => {};
 
 function setup() {
-  render(<NavMenu menuOpen={false} onClick={onClick} />, {
+  render(<NavMenu onClick={onClick} />, {
     wrapper: BrowserRouter,
   });
 }
@@ -23,17 +23,9 @@ test('has a close button', () => {
   ).toBeInTheDocument();
 });
 
+test.skip('clicking the close button closes the NavMenu', () => {});
+
 test('contains 6 links', () => {
   setup();
   expect(screen.getAllByRole('link')).toHaveLength(6);
-});
-
-test('menu defaults to closed', () => {
-  setup();
-  expect(screen.getByRole('list').className).toBe('');
-});
-
-test('menu can be open', () => {
-  render(<NavMenu menuOpen onClick={onClick} />, { wrapper: BrowserRouter });
-  expect(screen.getByRole('list').className).toBe('open');
 });

@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function NavMenu({ onClick, menuOpen }) {
+export default function NavMenu({ onClick }) {
   return (
     <>
-      <menu className={menuOpen ? 'open' : ''}>
+      <menu>
         <button type="button" aria-label="close menu" onClick={onClick}>
           ×
         </button>
@@ -17,12 +17,11 @@ export default function NavMenu({ onClick, menuOpen }) {
           <NavLink to="/">All Products</NavLink>
         </nav>
       </menu>
-      <div className={menuOpen ? 'menu-backdrop open' : 'menu-backdrop'} />
+      <div className="menu-backdrop" />
     </>
   );
 }
 
 NavMenu.propTypes = {
   onClick: PropTypes.func.isRequired,
-  menuOpen: PropTypes.bool.isRequired,
 };
