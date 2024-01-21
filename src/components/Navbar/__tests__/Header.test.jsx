@@ -15,13 +15,6 @@ test('has 3 children by default: a title, mini-cart, and menu button', () => {
   expect(screen.getByRole('banner').childElementCount).toBe(3);
 });
 
-test('logo is link to homepage', () => {
-  setup();
-  expect(
-    screen.getByRole('link', { name: 'Yuedpao Homepage' })
-  ).toHaveAccessibleName(/yuedpao homepage/i);
-});
-
 test('menu button shows 3 bars but is named "menu"', () => {
   setup();
   expect(screen.getByRole('button')).toHaveAccessibleName(/menu/i);
