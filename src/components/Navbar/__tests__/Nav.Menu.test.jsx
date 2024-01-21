@@ -18,12 +18,8 @@ test('renders a nav', () => {
 
 test('has a close button', () => {
   setup();
-  expect(
-    screen.getByRole('button', { name: 'close menu' })
-  ).toBeInTheDocument();
+  expect(screen.getByRole('button')).toHaveAccessibleName(/close menu/i);
 });
-
-test.skip('clicking the close button closes the NavMenu', () => {});
 
 test('contains 6 links', () => {
   setup();

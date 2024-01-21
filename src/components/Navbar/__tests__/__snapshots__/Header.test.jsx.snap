@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Matches snapshot for title, mini-cart, and menu button 1`] = `
+<div>
+  <header>
+    <button
+      aria-label="Menu"
+      type="button"
+    >
+      ☰
+    </button>
+    <a
+      href="/"
+    >
+      <span
+        aria-label="Yuedpao Homepage"
+        class="logo"
+        title="Yuedpao Homepage"
+      >
+        Yuedpao
+      </span>
+    </a>
+    <a
+      href="/cart"
+    >
+      Cart
+    </a>
+  </header>
+</div>
+`;

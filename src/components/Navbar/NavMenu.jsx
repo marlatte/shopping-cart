@@ -5,16 +5,16 @@ export default function NavMenu({ onClick }) {
   return (
     <>
       <menu>
-        <button type="button" aria-label="close menu" onClick={onClick}>
+        <button type="button" aria-label="Close Menu" onClick={onClick}>
           ×
         </button>
         <nav>
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/">Women</NavLink>
-          <NavLink to="/">Men</NavLink>
-          <NavLink to="/">Jewelry</NavLink>
-          <NavLink to="/">Electronics</NavLink>
-          <NavLink to="/">All Products</NavLink>
+          <NavLink to="/products/women">Women</NavLink>
+          <NavLink to="/products/men">Men</NavLink>
+          <NavLink to="/products/jewelry">Jewelry</NavLink>
+          <NavLink to="/products/electronics">Electronics</NavLink>
+          <NavLink to="/products/">All Products</NavLink>
         </nav>
       </menu>
       <div className="menu-backdrop" />
