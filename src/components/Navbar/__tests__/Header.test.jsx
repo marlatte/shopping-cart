@@ -35,6 +35,16 @@ test('clicking the menu button opens the NavMenu', async () => {
   expect(screen.getByRole('banner').childElementCount).toBe(5);
 });
 
+test('opening the menu shifts focus to the close button', async () => {
+  const user = userEvent.setup();
+  setup();
+  const menuBtn = screen.getByRole('button', { name: 'Menu' });
+
+  await user.click(menuBtn);
+
+  expect(screen.getByRole('button', { name: /close menu/i })).toHaveFocus();
+});
+
 test('clicking the close button closes the NavMenu', async () => {
   const user = userEvent.setup();
   setup();
@@ -46,4 +56,17 @@ test('clicking the close button closes the NavMenu', async () => {
   await user.click(closeBtn);
 
   expect(screen.getByRole('banner').childElementCount).toBe(3);
+});
+
+test('closing the menu shifts focus back to the menu button', async () => {
+  const user = userEvent.setup();
+  setup();
+
+  const menuBtn = screen.getByRole('button', { name: 'Menu' });
+  await user.click(menuBtn);
+
+  const closeBtn = screen.getByRole('button', { name: 'Close Menu' });
+  await user.click(closeBtn);
+
+  expect(screen.getByRole('button', { name: /menu/i })).toHaveFocus();
 });

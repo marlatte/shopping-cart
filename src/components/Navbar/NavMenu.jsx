@@ -5,7 +5,12 @@ export default function NavMenu({ onClick }) {
   return (
     <>
       <menu>
-        <button type="button" aria-label="Close Menu" onClick={onClick}>
+        <button
+          type="button"
+          aria-label="Close Menu"
+          className="close-menu-btn"
+          onClick={onClick}
+        >
           ×
         </button>
         <nav>

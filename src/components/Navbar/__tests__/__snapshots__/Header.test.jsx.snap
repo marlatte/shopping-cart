@@ -5,6 +5,7 @@ exports[`Matches snapshot for title, mini-cart, and menu button 1`] = `
   <header>
     <button
       aria-label="Menu"
+      class="open-menu-btn"
       type="button"
     >
       ☰
