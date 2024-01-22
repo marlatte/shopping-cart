@@ -21,7 +21,8 @@ test('has a close button', () => {
   expect(screen.getByRole('button')).toHaveAccessibleName(/close menu/i);
 });
 
-test('contains 6 links', () => {
+test('contains 6 links with h2 text', () => {
   setup();
   expect(screen.getAllByRole('link')).toHaveLength(6);
+  expect(screen.getAllByRole('heading')).toHaveLength(6);
 });
