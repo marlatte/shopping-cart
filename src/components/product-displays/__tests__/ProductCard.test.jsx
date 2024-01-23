@@ -40,3 +40,9 @@ test('displays a price', () => {
   expect(price).toHaveAccessibleName(`Price: $${testProduct.price}`);
   expect(price.textContent).toBe(`$${testProduct.price}`);
 });
+
+test('links to the correct product', () => {
+  setup(testProduct);
+
+  expect(screen.getByRole('link').href).toMatch(/product\/1/i);
+});

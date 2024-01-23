@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function ProductCard({ data }) {
+  const url = `/product/${data.id}`;
   return (
-    <Link to="/">
+    <Link to={url} className="product-card" data-testid="product card">
       <div className="img-container">
         <img src={data.image} alt={data.title} />
       </div>
