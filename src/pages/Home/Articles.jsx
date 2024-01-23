@@ -26,7 +26,7 @@ function Entry({ imgUrl, imgAlt, title }) {
         <img src={imgUrl} alt={imgAlt} />
       </div>
       <div className="fake-link">
-        <h2>{title}</h2>
+        <h3>{title}</h3>
       </div>
     </div>
   );

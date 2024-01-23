@@ -17,7 +17,7 @@ export default function CallToAction() {
 
   return (
     <section className="cta">
-      <h2>Upgrade your style</h2>
+      <h3>Upgrade your style</h3>
       <p>Get 15% off your next order by subscribing to our newsletter!</p>
       <fetcher.Form
         aria-label="Subscribe to our Newsletter"
