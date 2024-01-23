@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`matches a snapshot 1`] = `
+<div>
+  <section
+    class="hero"
+  >
+    <div
+      class="text-container"
+    >
+      <h1>
+        Clothes that are more than just fabric
+      </h1>
+      <p>
+        Beautiful 'fits that encourage you to get creative
+      </p>
+      <a
+        href="/products/"
+      >
+        Shop All Categories
+      </a>
+    </div>
+    <a
+      href="/products/"
+    >
+      <img
+        alt="Shop these styles and more!"
+        src="/src/assets/stylish-group.png"
+      />
+    </a>
+  </section>
+</div>
+`;
