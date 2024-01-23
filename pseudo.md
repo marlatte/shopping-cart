@@ -11,6 +11,7 @@
     - Or with [localForage](https://github.com/localForage/localForage) \*
   - Search icon (expands search input, then filter by title and description) \*
   - Menu icon -> Offcanvas: Men, Women, Jewelry, Electronics, & All Products sections
+- Add items to cart on individual product pages
 
 ## Components & Routes
 
@@ -21,11 +22,8 @@
     - Home `index: true`
     - Cart
     - Products/:category
-    - Product/:id \*
-
-## Testing
-
-(where and what)
+    - Product/:id
+  - Footer
 
 ## React Router tips:
 
