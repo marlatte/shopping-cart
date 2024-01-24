@@ -1,10 +1,16 @@
 import { describe, expect, test } from 'vitest';
-import { fetchCategoryNames, fetchItem, fetchItems } from '../fetch-data';
+import {
+  fetchCategoryNames,
+  fetchItem,
+  fetchItems,
+  getRandom3,
+} from '../fetch-data';
 
 describe.skip('fetch tests', () => {
-  test('fetches data for all 20 items from server', async () => {
+  test('fetches data for all 20 items in normal order', async () => {
     const data = await fetchItems();
     expect(data).toHaveLength(20);
+    expect(data[0].id).toBe(1);
   });
 
   test('fetches only data for a specific category', async () => {
@@ -46,5 +52,29 @@ describe.skip('fetch tests', () => {
       'electronics',
       'electronics',
     ]);
+  });
+
+  test('fetches in reverse order', async () => {
+    const reverseData = await fetchItems({ desc: true, limit: 10 });
+    expect(reverseData[0].id).toBe(10);
+  });
+});
+
+describe('sort tests', () => {
+  const testProducts = [{ id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }];
+
+  test('sorts products randomly, picks first 3', () => {
+    const result1 = getRandom3(testProducts);
+    const result2 = getRandom3(testProducts);
+    const result3 = getRandom3(testProducts);
+
+    expect(result1).toHaveLength(3);
+    expect(result1).toMatchObject(result1);
+    try {
+      expect(result1).not.toMatchObject(result2);
+    } catch (error) {
+      console.log(error);
+      expect(result1).not.toMatchObject(result3);
+    }
   });
 });

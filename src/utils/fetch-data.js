@@ -1,8 +1,9 @@
-export async function fetchItems({ category, limit } = {}) {
-  const useCategory = category ? `category/${category}` : '';
-  const useLimit = limit ? `?limit=${limit}` : '';
+export async function fetchItems({ category, desc, limit } = {}) {
+  const useCategory = category ? `/category/${category}` : '';
+  const sort = desc ? '?sort=desc' : '?sort=asc';
+  const useLimit = limit ? `&limit=${limit}` : '';
   const res = await fetch(
-    `https://fakestoreapi.com/products/${useCategory}${useLimit}`
+    `https://fakestoreapi.com/products${useCategory}${sort}${useLimit}`
   );
   const data = await res.json();
   return data;
@@ -18,4 +19,8 @@ export async function fetchItem(id) {
   const res = await fetch(`https://fakestoreapi.com/products/${id}`);
   const data = await res.json();
   return data;
+}
+
+export function getRandom3(data) {
+  return data.toSorted(() => Math.random() - 0.5).slice(0, 3);
 }
