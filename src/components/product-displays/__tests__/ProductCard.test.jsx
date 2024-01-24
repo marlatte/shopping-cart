@@ -14,35 +14,35 @@ const testProduct = {
   rating: { rate: 3.9, count: 120 },
 };
 
-function setup(data) {
-  return render(<ProductCard data={data} />, { wrapper: BrowserRouter });
+function setup() {
+  return render(<ProductCard data={testProduct} />, { wrapper: BrowserRouter });
 }
 
 test('has 2 children: image & body', () => {
-  setup(testProduct);
+  setup();
   expect(screen.getByRole('link').childElementCount).toBe(2);
 });
 
 test('displays an image with a src and alt text', () => {
-  setup(testProduct);
+  setup();
   expect(screen.getByRole('img').src).toBe(testProduct.image);
   expect(screen.getByRole('img')).toHaveAccessibleName(testProduct.title);
 });
 
 test('displays a product name', () => {
-  setup(testProduct);
+  setup();
   expect(screen.getByRole('heading').textContent).toMatch(testProduct.title);
 });
 
 test('displays a price', () => {
-  const { container } = setup(testProduct);
+  const { container } = setup();
   const price = container.querySelector('.price');
   expect(price).toHaveAccessibleName(`Price: $${testProduct.price}`);
   expect(price.textContent).toBe(`$${testProduct.price}`);
 });
 
 test('links to the correct product', () => {
-  setup(testProduct);
+  setup();
 
   expect(screen.getByRole('link').href).toMatch(/product\/1/i);
 });
