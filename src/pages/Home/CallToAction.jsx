@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useFetcher } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function CallToAction() {
   const [showToast, setShowToast] = useState(false);
@@ -49,7 +50,6 @@ export default function CallToAction() {
   );
 }
 
-// eslint-disable-next-line react/prop-types
 function Toast({ email, onClick }) {
   return (
     <div className="toast" role="alert" aria-label="Subscribe Successful">
@@ -65,3 +65,8 @@ function Toast({ email, onClick }) {
     </div>
   );
 }
+
+Toast.propTypes = {
+  email: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

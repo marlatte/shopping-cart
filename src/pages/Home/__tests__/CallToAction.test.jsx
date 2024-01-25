@@ -7,7 +7,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CallToAction from '../CallToAction';
-import toastAction from '../actions/toastAction';
+import toastAction from '../toast-action';
 
 function setup() {
   const router = createBrowserRouter([
