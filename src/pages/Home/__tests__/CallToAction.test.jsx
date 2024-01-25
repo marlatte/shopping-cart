@@ -110,7 +110,7 @@ test('toast can be closed manually', async () => {
     name: /subscribe successful/i,
   });
   expect(toast).toBeInTheDocument();
-  const closeBtn = screen.queryByRole('button', { name: 'Close Menu' });
+  const closeBtn = screen.queryByRole('button', { name: 'Close Toast' });
 
   await user.click(closeBtn);
 

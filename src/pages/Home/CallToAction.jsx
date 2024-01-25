@@ -56,8 +56,8 @@ function Toast({ email, onClick }) {
       <p>Thanks for subscribing, {email}!</p>
       <button
         type="button"
-        aria-label="Close Menu"
-        className="close-menu-btn"
+        aria-label="Close Toast"
+        className="close-toast-btn"
         onClick={onClick}
       >
         ×
