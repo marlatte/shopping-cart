@@ -1,6 +1,8 @@
+import userEvent from '@testing-library/user-event';
 import { expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import addCartAction from '../add-cart-action';
 import ProductInfo from '../ProductInfo';
 
 const testProduct = {
@@ -16,7 +18,11 @@ const testProduct = {
 
 function setup() {
   const router = createBrowserRouter([
-    { path: '/', element: <ProductInfo product={testProduct} /> },
+    {
+      path: '/',
+      element: <ProductInfo product={testProduct} />,
+      action: addCartAction,
+    },
   ]);
   return render(<RouterProvider router={router} />);
 }
@@ -45,12 +51,20 @@ test('roundedRating also rounds down', () => {
   expect(screen.getByText('3.6').className).toMatch('rating star-3.5');
 });
 
-test('Add to cart button returns product id', async () => {
-  // will need to beef this one up with a mock click handler
-  testProduct.id = 2;
+test('Add to cart button shows toast with hidden product id', async () => {
+  const user = userEvent.setup();
   setup();
 
   const addBtn = screen.getByRole('button', { name: /add to cart/i });
-
   expect(+addBtn.dataset.productId).toBe(testProduct.id);
+
+  await user.click(addBtn);
+
+  const toast = screen.queryByRole('alert', {
+    name: /add to cart successful/i,
+  });
+  expect(toast).toBeInTheDocument();
+
+  const addedId = screen.getByTestId('added-id');
+  expect(+addedId.dataset.productId).toBe(testProduct.id);
 });

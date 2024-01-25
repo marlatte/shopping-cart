@@ -24,7 +24,9 @@ exports[`Matches snapshot for title, mini-cart, and menu button 1`] = `
     <a
       href="/cart"
     >
-      Cart
+      Cart (
+      0
+      )
     </a>
   </header>
 </div>
