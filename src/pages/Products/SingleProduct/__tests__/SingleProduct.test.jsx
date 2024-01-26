@@ -62,3 +62,5 @@ test('ProductInfo is getting passed the correct info', async () => {
 
   expect(productTitle.textContent).toBe(testProduct1.title);
 });
+
+test.todo('Get correct product data from loader');

@@ -27,11 +27,13 @@
 
 ## React Router tips:
 
-- `/path/:dynamicSegment` means you'll be using:
+- `/path/:dynamicSegmentName` means you'll be using:
 
 ```
 export async function loader({ params }) {
-  const result = doAThing(params.dynamicSegment);
+  const result = await doAThing(
+    params.dynamicSegmentName
+  );
   return { result }
 }
 
