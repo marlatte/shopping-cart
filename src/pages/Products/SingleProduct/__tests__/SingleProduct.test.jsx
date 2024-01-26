@@ -32,7 +32,7 @@ global.fetch = vi.fn(() =>
 
 test('breadcrumbs list proper category', async () => {
   setup();
-  const allProducts = screen.getByRole('link', { name: 'All Products' });
+  const allProducts = await screen.findByRole('link', { name: 'All Products' });
   const currentCategory = await screen.findByRole('link', {
     name: convertToTitleCase(testProduct1.category),
   });
@@ -43,5 +43,22 @@ test('breadcrumbs list proper category', async () => {
     `https://fakestoreapi.com/products/${testProduct1.id}`
   );
 });
-test.todo('image has correct url');
-test.todo('ProductInfo is getting passed the correct info');
+
+test('image has correct url', async () => {
+  setup();
+  const productImage = await screen.findByRole('img', {
+    name: testProduct1.title,
+  });
+
+  expect(productImage.src).toMatch(testProduct1.image);
+  expect(fetch).toHaveBeenCalledWith(
+    `https://fakestoreapi.com/products/${testProduct1.id}`
+  );
+});
+
+test('ProductInfo is getting passed the correct info', async () => {
+  setup();
+  const productTitle = await screen.findByRole('heading');
+
+  expect(productTitle.textContent).toBe(testProduct1.title);
+});

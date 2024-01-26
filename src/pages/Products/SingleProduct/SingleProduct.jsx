@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchItem } from '../../../utils/fetch-data';
 import { convertToHref, convertToTitleCase } from '../../../utils/conversions';
+import ProductInfo from './ProductInfo';
 
 export default function SingleProduct({ productId }) {
-  const [product, setProduct] = useState({ category: '' });
+  const [product, setProduct] = useState({});
+
+  const productIsReady = !!Object.values(product).length;
 
   useEffect(() => {
     let ignore = false;
@@ -23,13 +26,23 @@ export default function SingleProduct({ productId }) {
 
   return (
     <main className="single-product">
-      <div className="breadcrumbs">
-        <Link to="/products">All Products</Link>
-        <div>&gt;</div>
-        <Link to={convertToHref(product.category)}>
-          {convertToTitleCase(product.category)}
-        </Link>
-      </div>
+      {productIsReady && (
+        <>
+          <div className="breadcrumbs">
+            <Link to="/products">All Products</Link>
+            <div>&gt;</div>
+            <Link to={convertToHref(product.category)}>
+              {convertToTitleCase(product.category)}
+            </Link>
+          </div>
+          <section className="image-container">
+            <div className="frame">
+              <img src={product.image} alt={product.title} />
+            </div>
+          </section>
+          <ProductInfo product={product} />
+        </>
+      )}
     </main>
   );
 }
