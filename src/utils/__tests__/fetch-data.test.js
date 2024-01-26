@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import {
   fetchCategoryNames,
   fetchItem,
@@ -6,57 +6,103 @@ import {
   getRandom3,
 } from '../fetch-data';
 
-describe.skip('fetch tests', () => {
+let fakeData;
+global.fetch = vi.fn(() =>
+  Promise.resolve({ json: () => Promise.resolve(fakeData) })
+);
+
+beforeEach(() => {
+  fetch.mockClear();
+});
+
+describe('fetch tests', () => {
   test('fetches data for all 20 items in normal order', async () => {
+    fakeData = [{ id: 1 }];
+    fakeData.length = 20;
     const data = await fetchItems();
+
     expect(data).toHaveLength(20);
     expect(data[0].id).toBe(1);
+    expect(fetch).toHaveBeenCalledWith(
+      'https://fakestoreapi.com/products?sort=asc'
+    );
   });
 
   test('fetches only data for a specific category', async () => {
+    fakeData = [{ id: 5 }];
+    fakeData.length = 4;
     const data = await fetchItems({ category: 'jewelery' });
+
     expect(data).toHaveLength(4);
     expect(data[0].id).toBe(5);
+    expect(fetch).toHaveBeenCalledWith(
+      'https://fakestoreapi.com/products/category/jewelery?sort=asc'
+    );
   });
 
   test('fetches a specific item', async () => {
+    fakeData = {
+      id: 1,
+      title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+    };
     const data = await fetchItem(1);
+
     expect(data.id).toBe(1);
     expect(data.title).toMatch(/fjallraven/i);
+    expect(fetch).toHaveBeenCalledWith('https://fakestoreapi.com/products/1');
   });
 
   test('throws if no item id is passed', async () => {
     await expect(fetchItem()).rejects.toThrow('Product not found');
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   test('fetches category names', async () => {
-    const data = await fetchCategoryNames();
-    expect(data).toHaveLength(4);
-    expect(data).toMatchObject([
+    fakeData = [
       'electronics',
       'jewelery',
       "men's clothing",
       "women's clothing",
-    ]);
+    ];
+    const data = await fetchCategoryNames();
+
+    expect(data).toHaveLength(4);
+    expect(data).toMatchObject(fakeData);
   });
 
   test('fetches correct number of items', async () => {
+    fakeData = [{ id: 1 }, { id: 2 }, { id: 3 }];
     const data = await fetchItems({ limit: 3 });
+
     expect(data).toHaveLength(3);
+    expect(fetch).toHaveBeenCalledWith(
+      'https://fakestoreapi.com/products?sort=asc&limit=3'
+    );
   });
 
   test('fetches correct number of items in a category', async () => {
+    fakeData = [{ category: 'electronics' }, { category: 'electronics' }];
     const data = await fetchItems({ category: 'electronics', limit: 2 });
+
     expect(data).toHaveLength(2);
     expect(data.map((item) => item.category)).toMatchObject([
       'electronics',
       'electronics',
     ]);
+    expect(fetch).toHaveBeenCalledWith(
+      'https://fakestoreapi.com/products/category/electronics?sort=asc&limit=2'
+    );
   });
 
   test('fetches in reverse order', async () => {
+    fakeData = [{ id: 10 }];
+    fakeData.length = 10;
     const reverseData = await fetchItems({ desc: true, limit: 10 });
+
     expect(reverseData[0].id).toBe(10);
+    expect(fetch).toHaveBeenCalledWith(
+      'https://fakestoreapi.com/products?sort=desc&limit=10'
+    );
   });
 });
 
