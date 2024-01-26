@@ -10,6 +10,6 @@ export function convertToHref(str) {
 export function convertToTitleCase(str) {
   return str
     .split(' ')
-    .map((word) => capitalize(word.replace(/'/g, '&apos;')))
+    .map((word) => capitalize(word))
     .join(' ');
 }
