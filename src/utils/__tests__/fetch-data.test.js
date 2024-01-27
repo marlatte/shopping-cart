@@ -5,6 +5,7 @@ import {
   fetchItems,
   getRandom3,
 } from '../fetch-data';
+import allProducts from '../../pages/Products/__tests__/allProducts';
 
 let fakeData;
 global.fetch = vi.fn(() =>
@@ -17,8 +18,7 @@ beforeEach(() => {
 
 describe('fetch tests', () => {
   test('fetches data for all 20 items in normal order', async () => {
-    fakeData = [{ id: 1 }];
-    fakeData.length = 20;
+    fakeData = allProducts;
     const data = await fetchItems();
 
     expect(data).toHaveLength(20);
@@ -41,11 +41,8 @@ describe('fetch tests', () => {
   });
 
   test('fetches a specific item', async () => {
-    fakeData = {
-      id: 1,
-      title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
-    };
-    const data = await fetchItem(1);
+    [fakeData] = allProducts;
+    const data = await fetchItem(fakeData.id);
 
     expect(data.id).toBe(1);
     expect(data.title).toMatch(/fjallraven/i);

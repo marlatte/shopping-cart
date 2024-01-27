@@ -1,3 +1,5 @@
+import { sanitizeAll, sanitizeProduct } from './conversions';
+
 export async function fetchItems({ category, desc, limit } = {}) {
   const useCategory = category ? `/category/${category}` : '';
   const sort = desc ? '?sort=desc' : '?sort=asc';
@@ -6,7 +8,7 @@ export async function fetchItems({ category, desc, limit } = {}) {
     `https://fakestoreapi.com/products${useCategory}${sort}${useLimit}`
   );
   const data = await res.json();
-  return data;
+  return sanitizeAll(data);
 }
 
 export async function fetchCategoryNames() {
@@ -18,7 +20,7 @@ export async function fetchItem(id) {
   if (!id) throw Error('Product not found');
   const res = await fetch(`https://fakestoreapi.com/products/${id}`);
   const data = await res.json();
-  return data;
+  return sanitizeProduct(data);
 }
 
 export function getRandom3(data) {

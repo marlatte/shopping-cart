@@ -6,11 +6,12 @@ import { singleLoader } from '../../products-loaders';
 import {
   convertToHref,
   convertToTitleCase,
+  sanitizeProduct,
 } from '../../../../utils/conversions';
 import allProducts from '../../__tests__/allProducts';
 
 const testProduct1 = allProducts[0];
-const testProduct2 = allProducts[1];
+const testProduct2 = sanitizeProduct(allProducts[1]);
 
 let fakeData;
 global.fetch = vi.fn(() =>
