@@ -15,7 +15,7 @@ const [product1, product2] = [allProducts[0], sanitizeProduct(allProducts[1])];
 function setup(quantity) {
   const fakeItem = { id: fakeData.id, quantity };
   const router = createBrowserRouter([
-    { path: '/', element: <CartItem item={fakeItem} /> },
+    { path: '/', element: <CartItem item={fakeItem} onChange={() => {}} /> },
   ]);
 
   return render(<RouterProvider router={router} />);
@@ -53,4 +53,18 @@ test('displays fetched price, title, and image for id:2', async () => {
   expect(image.src).toBe(fakeData.image);
 });
 
-test.todo('displays quantity setter with +/- buttons');
+test('displays quantity setter with +/- buttons', async () => {
+  fakeData = product2;
+  setup(2);
+  const quantity = await screen.findByRole('textbox');
+  const plusButton = await screen.findByRole('button', {
+    name: 'Add 1 to quantity',
+  });
+  const minusButton = await screen.findByRole('button', {
+    name: 'Subtract 1 from quantity',
+  });
+
+  expect(+quantity.value).toBe(2);
+  expect(plusButton).toHaveTextContent('+');
+  expect(minusButton).toHaveTextContent('-');
+});

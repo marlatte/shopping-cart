@@ -7,7 +7,7 @@ function getPriceAlt(product) {
   return `Price: ${product.price} dollar${product.price === 1 ? '' : 's'}`;
 }
 
-export default function CartItem({ item }) {
+export default function CartItem({ item, onChange }) {
   const [product, setProduct] = useState({});
 
   const itemIsReady = !!Object.values(product).length;
@@ -40,6 +40,23 @@ export default function CartItem({ item }) {
             <h4>
               <Link to={`/product/${product.id}`}>{product.title}</Link>
             </h4>
+            <div className="quantity">
+              <button type="button" aria-label="Subtract 1 from quantity">
+                -
+              </button>
+              <label>
+                Qty.
+                <input
+                  type="tel"
+                  name={`product-${item.id}-quantity`}
+                  value={item.quantity}
+                  onChange={onChange}
+                />
+              </label>
+              <button type="button" aria-label="Add 1 to quantity">
+                +
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -52,4 +69,5 @@ CartItem.propTypes = {
     id: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
   }).isRequired,
+  onChange: PropTypes.func.isRequired,
 };
