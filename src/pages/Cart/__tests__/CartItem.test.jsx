@@ -68,3 +68,13 @@ test('displays quantity setter with +/- buttons', async () => {
   expect(plusButton).toHaveTextContent('+');
   expect(minusButton).toHaveTextContent('-');
 });
+
+test('displays Remove button with correct product id', async () => {
+  setup(1);
+  const removeBtn = await screen.findByRole('button', {
+    name: 'Remove Item from Cart',
+  });
+
+  expect(removeBtn).toHaveTextContent('×');
+  expect(+removeBtn.value).toBe(fakeData.id);
+});

@@ -27,40 +27,50 @@ export default function CartItem({ item, onChange }) {
   });
 
   return (
-    <article className="cart-item">
-      {itemIsReady && (
+    itemIsReady && (
+      <article className="cart-item">
         <div className="image-container">
           <div className="frame">
             <img src={product.image} alt={product.title} />
           </div>
-          <div className="text">
-            <h3 className="price" aria-label={getPriceAlt(product)}>
-              ${product.price}
-            </h3>
-            <h4>
-              <Link to={`/product/${product.id}`}>{product.title}</Link>
-            </h4>
-            <div className="quantity">
-              <button type="button" aria-label="Subtract 1 from quantity">
-                -
-              </button>
-              <label>
-                Qty.
-                <input
-                  type="tel"
-                  name={`product-${item.id}-quantity`}
-                  value={item.quantity}
-                  onChange={onChange}
-                />
-              </label>
-              <button type="button" aria-label="Add 1 to quantity">
-                +
-              </button>
-            </div>
+        </div>
+        <div className="text">
+          <h3 className="price" aria-label={getPriceAlt(product)}>
+            ${product.price}
+          </h3>
+          <h4>
+            <Link to={`/product/${product.id}`}>{product.title}</Link>
+          </h4>
+          <div className="quantity">
+            <button type="button" aria-label="Subtract 1 from quantity">
+              -
+            </button>
+            <label>
+              Qty.
+              <input
+                type="tel"
+                name={`product-${item.id}-quantity`}
+                value={item.quantity}
+                onChange={onChange}
+              />
+            </label>
+            <button type="button" aria-label="Add 1 to quantity">
+              +
+            </button>
           </div>
         </div>
-      )}
-    </article>
+        <div className="remove-container">
+          <button
+            type="button"
+            name="remove"
+            value={item.id}
+            aria-label="Remove Item from Cart"
+          >
+            ×
+          </button>
+        </div>
+      </article>
+    )
   );
 }
 
