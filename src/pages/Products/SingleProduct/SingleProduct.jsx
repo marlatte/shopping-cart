@@ -1,11 +1,11 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { fetchItem } from '../../../utils/fetch-data';
 import { convertToHref, convertToTitleCase } from '../../../utils/conversions';
 import ProductInfo from './ProductInfo';
 
-export default function SingleProduct({ productId }) {
+export default function SingleProduct() {
+  const { id } = useLoaderData();
   const [product, setProduct] = useState({});
 
   const productIsReady = !!Object.values(product).length;
@@ -13,7 +13,7 @@ export default function SingleProduct({ productId }) {
   useEffect(() => {
     let ignore = false;
     async function getItemData() {
-      const productData = await fetchItem(productId);
+      const productData = await fetchItem(id);
       if (!ignore) setProduct(productData);
     }
 
@@ -22,7 +22,7 @@ export default function SingleProduct({ productId }) {
     return () => {
       ignore = true;
     };
-  }, [productId]);
+  }, [id]);
 
   return (
     <main className="single-product">
