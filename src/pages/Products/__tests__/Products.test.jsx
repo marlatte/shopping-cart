@@ -1,21 +1,22 @@
 import { expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import { multiLoader } from '../products-loaders';
 import allProducts from './allProducts';
 import Products from '../Products';
 
 function setup(category) {
-  const fakeLoader = { category };
   const routes = [
     {
       path: '/products/:category?',
       element: <Products />,
-      loader: () => fakeLoader,
+      loader: multiLoader,
     },
   ];
 
+  const params = category ? `/${category}` : '';
   const router = createMemoryRouter(routes, {
-    initialEntries: ['/products'],
+    initialEntries: [`/products${params}`],
   });
 
   return render(<RouterProvider router={router} />);
