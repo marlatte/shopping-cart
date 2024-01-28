@@ -4,7 +4,7 @@ import CartButton from './CartButton';
 import NavMenu from './NavMenu';
 import HomeLink from '../ui/HomeLink';
 
-export default function Header({ items }) {
+export default function Header({ miniCart }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -32,11 +32,16 @@ export default function Header({ items }) {
         ☰
       </button>
       <HomeLink />
-      <CartButton items={items} />
+      <CartButton miniCart={miniCart} />
     </header>
   );
 }
 
 Header.propTypes = {
-  items: PropTypes.number.isRequired,
+  miniCart: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };

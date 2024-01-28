@@ -4,8 +4,17 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from '../Header';
 
-function setup(items = 0) {
-  return render(<Header items={items} />, {
+const fakeCarts = {
+  empty: [],
+  one: [{ id: 1, quantity: 1 }],
+  three: [
+    { id: 1, quantity: 1 },
+    { id: 2, quantity: 2 },
+  ],
+};
+
+function setup(miniCart = fakeCarts.empty) {
+  return render(<Header miniCart={miniCart} />, {
     wrapper: BrowserRouter,
   });
 }
