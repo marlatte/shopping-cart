@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { fetchItem } from '../../utils/fetch-data';
+import paymentsImg from '../../assets/payment-methods.png';
 import CartItem from './CartItem';
 
 export default function Cart({ miniCart }) {
@@ -58,11 +59,54 @@ export default function Cart({ miniCart }) {
           <span className="value">${getSubtotal(cart)}</span>
         </h2>
       </section>
-      <section className="total-column">
+      <section className="total-column" data-testid="total-column">
         <h1>Total</h1>
         <hr />
+        <h3 className="subtotal">
+          <span className="label">Subtotal </span>
+          <span className="value">${getSubtotal(cart)}</span>
+        </h3>
+        <DeliveryRow />
+        <select name="delivery-options" id="delivery-options">
+          <option value="standard">Standard Delivery (Free)</option>
+          <option value="express">Express ($7)</option>
+          <option value="overnight">Overnight ($12)</option>
+        </select>
+        <hr />
+        <button type="button">Checkout</button>
+        <div className="payments" data-testid="payments">
+          <h3>We accept:</h3>
+          <img
+            src={paymentsImg}
+            alt="Apple Pay, American Express, VISA, VISA Electron, VISA Debit, VISA Carte Bleue, VISA Electron Carte Bleue, VISA Debit Carte Bleue, VISA Purchasing, Maestro, Mastercard, Debit Mastercard, Discover, Diners Club, PayPal, PayPal Pay in 4, 4 easy payments, Afterpay, Cash App Pay, Gift voucher, Google Pay"
+          />
+          <p>Got a discount code? Add it at the next step</p>
+        </div>
       </section>
     </main>
+  );
+}
+
+function DeliveryRow() {
+  const [showInfo, setShowInfo] = useState(false);
+  return (
+    <div className="delivery-row" data-testid="delivery-row">
+      <h3>Delivery</h3>
+      <button
+        type="button"
+        aria-label="More Info"
+        onClick={() => {
+          setShowInfo((current) => !current);
+        }}
+      >
+        i
+      </button>
+      {showInfo && (
+        <div className="popover" role="alert" aria-label="Delivery Information">
+          Shipping options and speeds vary based on your location
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -73,5 +117,4 @@ Cart.propTypes = {
       quantity: PropTypes.number.isRequired,
     }).isRequired
   ).isRequired,
-  // onChange: PropTypes.func.isRequired,
 };
