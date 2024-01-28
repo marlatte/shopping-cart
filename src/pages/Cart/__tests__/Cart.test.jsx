@@ -1,8 +1,9 @@
 import { render, screen, within } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { capitalize } from 'lodash';
+import { useEffect, useState } from 'react';
 import allProducts from '../../Products/__tests__/allProducts';
 import { sanitizeProduct } from '../../../utils/conversions';
 import Cart from '../Cart';
@@ -27,13 +28,26 @@ global.fetch = vi.fn((url) => {
   });
 });
 
+// eslint-disable-next-line react/prop-types
+function ContextWrapper({ hasItems }) {
+  const [miniCart, setMiniCart] = useState([]);
+  useEffect(() => {
+    if (hasItems) setMiniCart(fakeMiniCart);
+  }, [hasItems]);
+  return <Outlet context={{ miniCart }} />;
+}
+
 function setup(hasItems) {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: (
-        <Cart miniCart={hasItems ? fakeMiniCart : []} onChange={() => {}} />
-      ),
+      element: <ContextWrapper hasItems={hasItems} />,
+      children: [
+        {
+          index: true,
+          element: <Cart onChange={() => {}} />,
+        },
+      ],
     },
   ]);
 

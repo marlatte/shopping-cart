@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { fetchItem } from '../../utils/fetch-data';
 import paymentsImg from '../../assets/payment-methods.png';
 import CartItem from './CartItem';
 
-export default function Cart({ miniCart }) {
+export default function Cart() {
+  const { miniCart } = useOutletContext();
   const [cart, setCart] = useState([]);
 
   const cartIsReady = !!cart.length;
@@ -109,12 +110,3 @@ function DeliveryRow() {
     </div>
   );
 }
-
-Cart.propTypes = {
-  miniCart: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      quantity: PropTypes.number.isRequired,
-    }).isRequired
-  ).isRequired,
-};
