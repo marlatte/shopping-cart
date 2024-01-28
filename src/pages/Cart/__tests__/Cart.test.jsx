@@ -7,6 +7,16 @@ import Cart from '../Cart';
 
 const fakeData = [allProducts[0], sanitizeProduct(allProducts[1])];
 
+const fakeCart = [
+  { product: fakeData[0], quantity: 1 },
+  { product: fakeData[1], quantity: 2 },
+];
+
+const fakeMiniCart = [
+  { id: fakeData[0].id, quantity: 1 },
+  { id: fakeData[1].id, quantity: 2 },
+];
+
 global.fetch = vi.fn((url) => {
   const targetId = +url[url.length - 1];
   return Promise.resolve({
@@ -16,18 +26,23 @@ global.fetch = vi.fn((url) => {
 });
 
 function setup(hasItems) {
-  const fakeCart = [
-    { id: fakeData[0].id, quantity: 1 },
-    { id: fakeData[1].id, quantity: 2 },
-  ];
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Cart miniCart={hasItems ? fakeCart : []} onChange={() => {}} />,
+      element: (
+        <Cart miniCart={hasItems ? fakeMiniCart : []} onChange={() => {}} />
+      ),
     },
   ]);
 
   return render(<RouterProvider router={router} />);
+}
+
+function getSubtotal(cart) {
+  return cart.reduce(
+    (acc, curr) => acc + curr.product.price * curr.quantity,
+    0
+  );
 }
 
 describe('Section: Cart list', () => {
@@ -48,15 +63,26 @@ describe('Section: Cart list', () => {
 
   test("has correct number of items and hr's", async () => {
     const { container } = setup(true);
-    const itemList = await screen.findAllByTestId('cart item');
-    const dividers = container.querySelectorAll('hr');
+    const itemList = await screen.findAllByTestId('cart-item');
+    const dividers = container.querySelectorAll('.item-container > hr');
 
     expect(itemList).toHaveLength(2);
     expect(dividers).toHaveLength(2);
     expect(fetch).toHaveBeenCalledWith('https://fakestoreapi.com/products/1');
   });
 
-  test.todo('has subtotal below items');
+  test('has subtotal below items', async () => {
+    setup(true);
+    const cartList = screen.getByTestId('cart-list');
+    const subtotalText = await screen.findByRole('heading', {
+      name: /subtotal/i,
+    });
+
+    expect(cartList).toContain(subtotalText);
+    expect(subtotalText.textContent).toMatch(
+      `Subtotal $${getSubtotal(fakeCart)}`
+    );
+  });
 });
 
 describe.skip('Section: Total', () => {

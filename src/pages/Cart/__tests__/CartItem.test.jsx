@@ -7,15 +7,14 @@ import { sanitizeProduct } from '../../../utils/conversions';
 
 const [product1, product2] = [allProducts[0], sanitizeProduct(allProducts[1])];
 
-let fakeData;
+const fakeData = { product: product1, quantity: 1 };
+const fns = [() => {}];
 
-function setup(quantity) {
+function setup() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: (
-        <CartItem product={fakeData} quantity={quantity} onChange={() => {}} />
-      ),
+      element: <CartItem item={fakeData} handlers={fns} />,
     },
   ]);
 
@@ -27,36 +26,39 @@ function getPriceAlt(product) {
 }
 
 test('displays fetched price, title, and image for id:1', async () => {
-  fakeData = product1;
-  setup(1);
+  setup();
   const price = await screen.findByRole('heading', {
-    name: getPriceAlt(fakeData),
+    name: getPriceAlt(fakeData.product),
   });
-  const title = await screen.findByRole('link', { name: fakeData.title });
+  const title = await screen.findByRole('link', {
+    name: fakeData.product.title,
+  });
   const image = await screen.findByRole('img');
 
-  expect(price).toHaveTextContent(`$${fakeData.price}`);
-  expect(title.href).toMatch(`/product/${fakeData.id}`);
-  expect(image.src).toBe(fakeData.image);
+  expect(price).toHaveTextContent(`$${fakeData.product.price}`);
+  expect(title.href).toMatch(`/product/${fakeData.product.id}`);
+  expect(image.src).toBe(fakeData.product.image);
 });
 
 test('displays fetched price, title, and image for id:2', async () => {
-  fakeData = product2;
-  setup(1);
+  fakeData.product = product2;
+  setup();
   const price = await screen.findByRole('heading', {
-    name: getPriceAlt(fakeData),
+    name: getPriceAlt(fakeData.product),
   });
-  const title = await screen.findByRole('link', { name: fakeData.title });
+  const title = await screen.findByRole('link', {
+    name: fakeData.product.title,
+  });
   const image = await screen.findByRole('img');
 
-  expect(price).toHaveTextContent(`$${fakeData.price}`);
-  expect(title.href).toMatch(`/product/${fakeData.id}`);
-  expect(image.src).toBe(fakeData.image);
+  expect(price).toHaveTextContent(`$${fakeData.product.price}`);
+  expect(title.href).toMatch(`/product/${fakeData.product.id}`);
+  expect(image.src).toBe(fakeData.product.image);
 });
 
 test('displays quantity setter with +/- buttons', async () => {
-  fakeData = product2;
-  setup(2);
+  fakeData.quantity = 2;
+  setup();
   const quantity = await screen.findByRole('textbox');
   const plusButton = await screen.findByRole('button', {
     name: 'Add 1 to quantity',
@@ -71,11 +73,11 @@ test('displays quantity setter with +/- buttons', async () => {
 });
 
 test('displays Remove button with correct product id', async () => {
-  setup(1);
+  setup();
   const removeBtn = await screen.findByRole('button', {
     name: 'Remove Item from Cart',
   });
 
   expect(removeBtn).toHaveTextContent('×');
-  expect(+removeBtn.value).toBe(fakeData.id);
+  expect(+removeBtn.value).toBe(fakeData.product.id);
 });

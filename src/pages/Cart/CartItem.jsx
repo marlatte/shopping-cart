@@ -5,9 +5,10 @@ function getPriceAlt(product) {
   return `Price: ${product.price} dollar${product.price === 1 ? '' : 's'}`;
 }
 
-export default function CartItem({ product, quantity, onChange }) {
+export default function CartItem({ item, handlers }) {
+  const { product, quantity } = item;
   return (
-    <article className="cart-item" data-testid="cart item">
+    <article className="cart-item" data-testid="cart-item">
       <div className="image-container">
         <div className="frame">
           <img src={product.image} alt={product.title} />
@@ -30,7 +31,7 @@ export default function CartItem({ product, quantity, onChange }) {
               type="tel"
               name={`product-${product.id}-quantity`}
               value={quantity}
-              onChange={onChange}
+              onChange={handlers[0]}
             />
           </label>
           <button type="button" aria-label="Add 1 to quantity">
@@ -53,18 +54,20 @@ export default function CartItem({ product, quantity, onChange }) {
 }
 
 CartItem.propTypes = {
-  product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    rating: PropTypes.shape({
-      rate: PropTypes.number.isRequired,
-      count: PropTypes.number.isRequired,
+  item: PropTypes.shape({
+    product: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+      category: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      rating: PropTypes.shape({
+        rate: PropTypes.number.isRequired,
+        count: PropTypes.number.isRequired,
+      }).isRequired,
     }).isRequired,
+    quantity: PropTypes.number.isRequired,
   }).isRequired,
-  quantity: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
+  handlers: PropTypes.arrayOf(PropTypes.func).isRequired,
 };
