@@ -28,7 +28,7 @@ export default function CartItem({ item, onChange }) {
 
   return (
     itemIsReady && (
-      <article className="cart-item">
+      <article className="cart-item" data-testid="cart item">
         <div className="image-container">
           <div className="frame">
             <img src={product.image} alt={product.title} />
