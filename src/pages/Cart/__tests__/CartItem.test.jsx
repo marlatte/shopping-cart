@@ -1,21 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { expect, test, vi } from 'vitest';
+import { expect, test } from 'vitest';
 import allProducts from '../../Products/__tests__/allProducts';
 import CartItem from '../CartItem';
 import { sanitizeProduct } from '../../../utils/conversions';
 
-let fakeData;
-global.fetch = vi.fn(() =>
-  Promise.resolve({ json: () => Promise.resolve(fakeData) })
-);
-
 const [product1, product2] = [allProducts[0], sanitizeProduct(allProducts[1])];
 
+let fakeData;
+
 function setup(quantity) {
-  const fakeItem = { id: fakeData.id, quantity };
   const router = createBrowserRouter([
-    { path: '/', element: <CartItem item={fakeItem} onChange={() => {}} /> },
+    {
+      path: '/',
+      element: (
+        <CartItem product={fakeData} quantity={quantity} onChange={() => {}} />
+      ),
+    },
   ]);
 
   return render(<RouterProvider router={router} />);
