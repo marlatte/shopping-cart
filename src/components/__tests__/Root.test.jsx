@@ -1,8 +1,27 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { describe, test } from 'vitest';
-import { render } from '@testing-library/react';
+import {
+  RouterProvider,
+  createBrowserRouter,
+  useOutletContext,
+} from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, test, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Root from '../Root';
-import { Pages, loaders, actions } from '../../pages/pages';
+
+const FakeComponent = vi.fn(() => {
+  const { miniCart, addToCart } = useOutletContext();
+
+  return (
+    <main>
+      <h1>My Fake Component</h1>
+      <div>miniCart: {JSON.stringify(miniCart)}</div>
+
+      <button type="button" value="1" onClick={addToCart}>
+        Add to cart
+      </button>
+    </main>
+  );
+});
 
 function setup() {
   const router = createBrowserRouter([
@@ -10,12 +29,9 @@ function setup() {
       path: '/',
       element: <Root />,
       children: [
-        { path: 'cart', element: <Pages.Cart /> },
         {
-          path: 'product/:id',
-          element: <Pages.SingleProduct />,
-          loader: loaders.singleLoader,
-          action: actions.addToCart,
+          index: true,
+          element: <FakeComponent />,
         },
       ],
     },
@@ -24,9 +40,35 @@ function setup() {
   return render(<RouterProvider router={router} />);
 }
 
-describe.skip('Adding to cart', () => {
-  test('creates new entry');
-  test('same product adds quantity, not new entry');
+describe('Adding to cart', () => {
+  test('creates new entry', async () => {
+    setup();
+    const user = userEvent.setup();
+    const addBtn = screen.getByRole('button', { name: /add to cart/i });
+    const miniCartDisplay = screen.getByText(/miniCart/);
+
+    expect(miniCartDisplay.textContent).toMatch(' []');
+
+    await user.click(addBtn);
+
+    expect(miniCartDisplay.textContent).toMatch('[{"id":1,"quantity":1}]');
+  });
+
+  test('same product adds quantity, not new entry', async () => {
+    setup();
+    const user = userEvent.setup();
+    const addBtn = screen.getByRole('button', { name: /add to cart/i });
+    const miniCartDisplay = screen.getByText(/miniCart/);
+
+    await user.click(addBtn);
+    expect(miniCartDisplay.textContent).toMatch('[{"id":1,"quantity":1}]');
+
+    await user.click(addBtn);
+    expect(miniCartDisplay.textContent).toMatch('[{"id":1,"quantity":2}]');
+
+    await user.click(addBtn);
+    expect(miniCartDisplay.textContent).toMatch('[{"id":1,"quantity":3}]');
+  });
 });
 
 describe.skip('Removing from cart', () => {
