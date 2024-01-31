@@ -1,6 +1,7 @@
-import { get as getCart } from './cartController';
+import { addNew, get as getCart } from './cartController';
 
-export default function rootLoader() {
+export default async function rootLoader() {
+  addNew(1);
   const miniCart = getCart();
   console.log('loader:', miniCart);
   return { miniCart };

@@ -13,13 +13,11 @@ function setup() {
       path: '/',
       element: <Root />,
       loader: rootLoader,
-      action: () => {},
       children: [
         {
           index: true,
           element: <FakeComponent />,
           action: cartAction,
-          loader: () => {},
         },
       ],
     },

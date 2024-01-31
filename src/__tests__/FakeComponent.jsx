@@ -10,6 +10,7 @@ export async function cartAction({ request }) {
 }
 
 export const FakeComponent = vi.fn(() => {
+  console.log('Fake Component');
   const { miniCart, addToCart, removeFromCart, plusQty, minusQty, changeQty } =
     useOutletContext();
   const testFetcher = useFetcher('test-quantity');
