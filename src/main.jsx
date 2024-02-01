@@ -53,8 +53,11 @@ const router = createBrowserRouter([
           const formData = await request.formData();
           const id = +formData.get('id');
           const quantity = +formData.get('quantity');
-          console.log('Updating product ', id, ' to qty: ', quantity);
-          update(id, quantity);
+          const modifier = +formData.get('modifier');
+
+          const newQuant = modifier ? quantity + modifier : quantity;
+          console.log('Updating product ', id, ' to qty: ', newQuant);
+          update(id, newQuant);
           return null;
         },
       },

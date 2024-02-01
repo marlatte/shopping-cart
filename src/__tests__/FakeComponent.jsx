@@ -23,6 +23,7 @@ export function FakeProduct() {
 }
 
 export function FakeCart() {
+  console.log('Fake Cart');
   const { miniCart } = useOutletContext();
 
   const quantityFetcher = useFetcher('test-quantity');
@@ -48,9 +49,10 @@ export function FakeCart() {
         <div className="quantity">
           <quantityFetcher.Form method="post">
             <button
-              type="button"
+              type="submit"
+              name="modifier"
+              value="-1"
               aria-label="Subtract 1 from quantity"
-              // onClick={minusQty}
             >
               -
             </button>
@@ -68,9 +70,10 @@ export function FakeCart() {
             </label>
             <input type="hidden" name="id" value={miniCart[0].id} />
             <button
-              type="button"
+              type="submit"
+              name="modifier"
+              value="1"
               aria-label="Add 1 to quantity"
-              // onClick={plusQty}
             >
               +
             </button>
