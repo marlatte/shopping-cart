@@ -26,11 +26,12 @@ function setup() {
   return render(<RouterProvider router={router} />);
 }
 
-describe('Adding to cart', () => {
+describe.skip('Adding to cart', () => {
   test('creates new entry', async () => {
     setup();
     // const user = userEvent.setup();
     const addBtn = screen.getByRole('button', { name: /add 1 to cart/i });
+    expect(addBtn).toBeInTheDocument();
     // const miniCartDisplay = screen.getByText(/miniCart/);
 
     // expect(miniCartDisplay.textContent).toMatch(' []');

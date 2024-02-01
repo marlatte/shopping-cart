@@ -5,11 +5,11 @@ import SingleProduct from './Products/SingleProduct/SingleProduct';
 
 import { singleLoader, multiLoader } from './Products/products-loaders';
 
-import toastAction from './Home/toast-action';
+import newsletterAction from './Home/toast-action';
 import addToCart from './Products/SingleProduct/add-cart-action';
 
 const Pages = { Home, Cart, Products, SingleProduct };
 const loaders = { singleLoader, multiLoader };
-const actions = { toastAction, addToCart };
+const actions = { newsletterAction, addToCart };
 
 export { Pages, loaders, actions };

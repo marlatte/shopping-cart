@@ -1,51 +1,56 @@
 import { useFetcher, useOutletContext } from 'react-router-dom';
-import { vi } from 'vitest';
 
-export async function cartAction({ request }) {
-  const formData = await request.formData();
-  const quantity = formData.get('quantity');
-  const id = formData.get('id');
-  console.log(id, ':', quantity);
-  return { id, quantity };
-}
-
-export const FakeComponent = vi.fn(() => {
-  console.log('Fake Component');
-  const { miniCart, addToCart, removeFromCart, plusQty, minusQty, changeQty } =
-    useOutletContext();
-  const testFetcher = useFetcher('test-quantity');
+export function FakeProduct() {
+  console.log('Fake Product');
+  const { miniCart } = useOutletContext();
+  const addFetcher = useFetcher('test-add');
 
   return (
-    <main>
-      <h1>My Fake Component</h1>
+    <main className="product">
+      <h1>My Fake Product</h1>
       <div>miniCart: {JSON.stringify(miniCart)}</div>
 
-      <button type="button" value="1" onClick={addToCart}>
-        Add 1 to cart
-      </button>
-      <button type="button" value="2" onClick={addToCart}>
-        Add 2 to cart
-      </button>
+      <addFetcher.Form method="post">
+        <button type="submit" name="id" value="1">
+          Add 1 to cart
+        </button>
+        <button type="submit" name="id" value="2">
+          Add 2 to cart
+        </button>
+      </addFetcher.Form>
+    </main>
+  );
+}
 
-      <div className="remove-container">
+export function FakeCart() {
+  const { miniCart } = useOutletContext();
+
+  const quantityFetcher = useFetcher('test-quantity');
+  const destroyFetcher = useFetcher('test-destroy');
+
+  return (
+    <main className="cart">
+      <h1>My Fake Cart</h1>
+      <div>miniCart: {JSON.stringify(miniCart)}</div>
+
+      <destroyFetcher.Form method="post" action="destroy">
         <button
-          type="button"
+          type="submit"
           name="remove"
-          value="1"
+          value={miniCart[0]?.id || ''}
           aria-label="Remove Item from Cart"
-          onClick={removeFromCart}
         >
           ×
         </button>
-      </div>
+      </destroyFetcher.Form>
 
       {!!miniCart.length && (
         <div className="quantity">
-          <testFetcher.Form method="post" id="2">
+          <quantityFetcher.Form method="post">
             <button
               type="button"
               aria-label="Subtract 1 from quantity"
-              onClick={minusQty}
+              // onClick={minusQty}
             >
               -
             </button>
@@ -55,24 +60,23 @@ export const FakeComponent = vi.fn(() => {
                 type="number"
                 min="1"
                 name="quantity"
-                defaultValue={miniCart[0].quantity}
+                value={miniCart[0].quantity}
                 onChange={(e) => {
-                  changeQty();
-                  testFetcher.submit(e.currentTarget.form);
+                  quantityFetcher.submit(e.currentTarget.form);
                 }}
               />
             </label>
-            <input type="hidden" name="id" value="2" />
+            <input type="hidden" name="id" value={miniCart[0].id} />
             <button
               type="button"
               aria-label="Add 1 to quantity"
-              onClick={plusQty}
+              // onClick={plusQty}
             >
               +
             </button>
-          </testFetcher.Form>
+          </quantityFetcher.Form>
         </div>
       )}
     </main>
   );
-});
+}

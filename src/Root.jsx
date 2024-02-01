@@ -3,7 +3,6 @@ import Header from './components/Navbar/Header';
 // import Footer from './components/Footer';
 
 export default function Root() {
-  console.log('root init');
   const { miniCart } = useLoaderData();
   console.log('root:', miniCart);
 
