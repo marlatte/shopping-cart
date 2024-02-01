@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Root from './Root';
 import ErrorPage from './ErrorPage';
-// import { Pages, loaders, actions } from './pages/pages';
+import { Pages, loaders, actions } from './pages/pages';
 import './index.css';
 import rootLoader from './root-loader';
 
@@ -38,38 +38,16 @@ const router = createBrowserRouter([
       {
         element: <FakeProduct />,
         index: true,
-        action: async ({ request }) => {
-          const formData = await request.formData();
-          const id = +formData.get('id');
-          console.log('Adding product :', id);
-          addNew(id);
-          return null;
-        },
+        action: actions.addToCart,
       },
       {
         path: '/cart',
         element: <FakeCart />,
-        action: async ({ request }) => {
-          const formData = await request.formData();
-          const id = +formData.get('id');
-          const quantity = +formData.get('quantity');
-          const modifier = +formData.get('modifier');
-
-          const newQuant = modifier ? quantity + modifier : quantity;
-          console.log('Updating product ', id, ' to qty: ', newQuant);
-          update(id, newQuant);
-          return null;
-        },
+        action: actions.updateCart,
       },
       {
         path: '/cart/destroy',
-        action: async ({ request }) => {
-          const formData = await request.formData();
-          const id = +formData.get('remove');
-          console.log('Removing product:', id);
-          remove(id);
-          return null;
-        },
+        action: actions.removeFromCart,
       },
     ],
   },
