@@ -1,12 +1,16 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useFetcher } from 'react-router-dom';
 
 function getPriceAlt(product) {
   return `Price: ${product.price} dollar${product.price === 1 ? '' : 's'}`;
 }
 
-export default function CartItem({ item, handlers }) {
+export default function CartItem({ item }) {
+  console.log('Cart Item');
   const { product, quantity } = item;
+  const quantityFetcher = useFetcher('update-quantity');
+  const destroyFetcher = useFetcher('destroy');
+
   return (
     <article className="cart-item" data-testid="cart-item">
       <div className="image-container">
@@ -22,32 +26,50 @@ export default function CartItem({ item, handlers }) {
           <Link to={`/product/${product.id}`}>{product.title}</Link>
         </h4>
         <div className="quantity">
-          <button type="button" aria-label="Subtract 1 from quantity">
-            -
-          </button>
-          <label>
-            Qty.
-            <input
-              type="tel"
-              name={`product-${product.id}-quantity`}
-              value={quantity}
-              onChange={handlers[0]}
-            />
-          </label>
-          <button type="button" aria-label="Add 1 to quantity">
-            +
-          </button>
+          <quantityFetcher.Form method="post">
+            <button
+              type="submit"
+              name="modifier"
+              value="-1"
+              aria-label="Subtract 1 from quantity"
+            >
+              -
+            </button>
+            <label>
+              Qty.
+              <input
+                type="number"
+                min="1"
+                name="quantity"
+                value={quantity}
+                onChange={(e) => {
+                  quantityFetcher.submit(e.currentTarget.form);
+                }}
+              />
+            </label>
+            <input type="hidden" name="id" value={product.id} />
+            <button
+              type="submit"
+              name="modifier"
+              value="1"
+              aria-label="Add 1 to quantity"
+            >
+              +
+            </button>
+          </quantityFetcher.Form>
         </div>
       </div>
       <div className="remove-container">
-        <button
-          type="button"
-          name="remove"
-          value={product.id}
-          aria-label="Remove Item from Cart"
-        >
-          ×
-        </button>
+        <destroyFetcher.Form method="post" action="destroy">
+          <button
+            type="submit"
+            name="remove"
+            value={product.id}
+            aria-label="Remove Item from Cart"
+          >
+            ×
+          </button>
+        </destroyFetcher.Form>
       </div>
     </article>
   );
@@ -69,5 +91,4 @@ CartItem.propTypes = {
     }).isRequired,
     quantity: PropTypes.number.isRequired,
   }).isRequired,
-  handlers: PropTypes.arrayOf(PropTypes.func).isRequired,
 };

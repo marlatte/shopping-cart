@@ -9,8 +9,6 @@ export default function ProductInfo({ product }) {
   const { rate: rating, count } = product.rating;
   const roundedRating = (Math.round((10 * rating) / 5) * 5) / 10;
 
-  const addedId = fetcher.data || 'none';
-
   useEffect(() => {
     if (showToast) {
       setTimeout(() => {
@@ -31,7 +29,9 @@ export default function ProductInfo({ product }) {
         </div>
         <div className="reviews">{count} reviews</div>
       </div>
-      <p className="price" aria-label={`Price: $${price}`}>{`$${price}`}</p>
+      <p className="price" aria-label={`Price: $${price}`}>
+        ${price}
+      </p>
       <p className="description">{description}</p>
       <fetcher.Form
         method="post"
@@ -45,7 +45,6 @@ export default function ProductInfo({ product }) {
       </fetcher.Form>
       {showToast && (
         <Toast
-          id={addedId}
           onClick={() => {
             setShowToast(false);
           }}
@@ -55,10 +54,9 @@ export default function ProductInfo({ product }) {
   );
 }
 
-function Toast({ id, onClick }) {
+function Toast({ onClick }) {
   return (
     <div className="toast" role="alert" aria-label="Add to Cart Successful">
-      <div hidden data-testid="added-id" data-product-id={id} />
       <p>Product added to cart</p>
       <button
         type="button"
@@ -88,6 +86,5 @@ ProductInfo.propTypes = {
 };
 
 Toast.propTypes = {
-  id: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };

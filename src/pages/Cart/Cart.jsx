@@ -7,6 +7,7 @@ import CartItem from './CartItem';
 export default function Cart() {
   const { miniCart } = useOutletContext();
   const [cart, setCart] = useState([]);
+  console.log('Cart: ', cart);
 
   const cartIsReady = !!cart.length;
 
@@ -15,9 +16,18 @@ export default function Cart() {
     async function getItemData(item) {
       const itemData = await fetchItem(item.id);
       if (!ignore)
-        setCart((currentCart) =>
-          currentCart.concat({ product: itemData, quantity: item.quantity })
-        );
+        setCart((currentCart) => {
+          const duplicateIndex = currentCart.findIndex(
+            (curr) => curr.product.id === item.id
+          );
+          if (duplicateIndex < 0) {
+            return currentCart.concat({
+              product: itemData,
+              quantity: item.quantity,
+            });
+          }
+          return currentCart.splice(duplicateIndex, 1);
+        });
     }
 
     miniCart.forEach((item) => {
