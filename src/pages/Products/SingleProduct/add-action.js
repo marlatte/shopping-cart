@@ -5,5 +5,5 @@ export default async function action({ request }) {
   const id = +formData.get('id');
   console.log('Adding product :', id);
   addNew(id);
-  return null;
+  return id;
 }

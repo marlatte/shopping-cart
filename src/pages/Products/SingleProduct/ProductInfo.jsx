@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useFetcher } from 'react-router-dom';
 
 export default function ProductInfo({ product }) {
-  const fetcher = useFetcher({ key: 'add-to-cart' });
+  const fetcher = useFetcher({ key: 'add' });
   const [showToast, setShowToast] = useState(false);
   const { id, title, price, description } = product;
   const { rate: rating, count } = product.rating;
@@ -39,7 +39,7 @@ export default function ProductInfo({ product }) {
           setShowToast(true);
         }}
       >
-        <button type="submit" name="product" value={id} data-product-id={id}>
+        <button type="submit" name="id" value={id}>
           Add to cart
         </button>
       </fetcher.Form>

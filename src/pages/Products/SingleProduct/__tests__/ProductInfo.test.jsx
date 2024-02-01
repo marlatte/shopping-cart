@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import addCartAction from '../add-cart-action';
+import addCartAction from '../add-action';
 import ProductInfo from '../ProductInfo';
 
 const testProduct = {
@@ -56,7 +56,7 @@ test('Add to cart button shows toast with hidden product id', async () => {
   setup();
 
   const addBtn = screen.getByRole('button', { name: /add to cart/i });
-  expect(+addBtn.dataset.productId).toBe(testProduct.id);
+  expect(+addBtn.value).toBe(testProduct.id);
 
   await user.click(addBtn);
 
