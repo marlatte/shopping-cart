@@ -1,29 +1,50 @@
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { Link, useFetcher } from 'react-router-dom';
-
-function getPriceAlt(product) {
-  return `Price: ${product.price} dollar${product.price === 1 ? '' : 's'}`;
-}
+import { fetchItem } from '../../utils/fetch-data';
 
 export default function CartItem({ item }) {
   console.log('Cart Item');
-  const { product, quantity } = item;
+  const [product, setProduct] = useState({});
+  const { id, quantity, price } = item;
   const quantityFetcher = useFetcher('update-quantity');
   const destroyFetcher = useFetcher('destroy');
+
+  useEffect(() => {
+    let ignore = false;
+    async function getItemData() {
+      const itemData = await fetchItem(id);
+      if (!ignore) {
+        setProduct(itemData);
+      }
+    }
+
+    getItemData();
+
+    return () => {
+      ignore = true;
+    };
+  }, [id]);
+
+  function getPriceAlt() {
+    return `Price: ${price} dollar${price === 1 ? '' : 's'}`;
+  }
 
   return (
     <article className="cart-item" data-testid="cart-item">
       <div className="image-container">
         <div className="frame">
-          <img src={product.image} alt={product.title} />
+          <Link to={`/product/${id}`}>
+            <img src={product.image} alt={product.title} />
+          </Link>
         </div>
       </div>
       <div className="text">
-        <h3 className="price" aria-label={getPriceAlt(product)}>
-          ${product.price}
+        <h3 className="price" aria-label={getPriceAlt()}>
+          ${price}
         </h3>
         <h4>
-          <Link to={`/product/${product.id}`}>{product.title}</Link>
+          <Link to={`/product/${id}`}>{product.title}</Link>
         </h4>
         <div className="quantity">
           <quantityFetcher.Form method="post">
@@ -47,7 +68,7 @@ export default function CartItem({ item }) {
                 }}
               />
             </label>
-            <input type="hidden" name="id" value={product.id} />
+            <input type="hidden" name="id" value={id} />
             <button
               type="submit"
               name="modifier"
@@ -64,7 +85,7 @@ export default function CartItem({ item }) {
           <button
             type="submit"
             name="remove"
-            value={product.id}
+            value={id}
             aria-label="Remove Item from Cart"
           >
             ×
@@ -77,18 +98,8 @@ export default function CartItem({ item }) {
 
 CartItem.propTypes = {
   item: PropTypes.shape({
-    product: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      rating: PropTypes.shape({
-        rate: PropTypes.number.isRequired,
-        count: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired,
+    id: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
   }).isRequired,
 };

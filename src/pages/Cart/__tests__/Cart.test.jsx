@@ -1,5 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { capitalize } from 'lodash';
@@ -10,23 +10,10 @@ import Cart from '../Cart';
 
 const fakeData = [allProducts[0], sanitizeProduct(allProducts[1])];
 
-const fakeCart = [
-  { product: fakeData[0], quantity: 1 },
-  { product: fakeData[1], quantity: 2 },
-];
-
 const fakeMiniCart = [
-  { id: fakeData[0].id, quantity: 1 },
-  { id: fakeData[1].id, quantity: 2 },
+  { id: fakeData[0].id, quantity: 1, price: fakeData[0].price },
+  { id: fakeData[1].id, quantity: 2, price: fakeData[1].price },
 ];
-
-global.fetch = vi.fn((url) => {
-  const targetId = +url[url.length - 1];
-  return Promise.resolve({
-    json: () =>
-      Promise.resolve(fakeData.filter((item) => item.id === targetId)[0]),
-  });
-});
 
 // eslint-disable-next-line react/prop-types
 function ContextWrapper({ hasItems }) {
@@ -45,7 +32,7 @@ function setup(hasItems) {
       children: [
         {
           index: true,
-          element: <Cart onChange={() => {}} />,
+          element: <Cart />,
         },
       ],
     },
@@ -55,25 +42,17 @@ function setup(hasItems) {
 }
 
 function getSubtotal(cart) {
-  return cart.reduce(
-    (acc, curr) => acc + curr.product.price * curr.quantity,
-    0
-  );
+  return cart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
 }
 
 describe('Section: Cart list', () => {
-  test('has heading & reservation message', () => {
+  test('has heading, reservation, & empty cart messages', () => {
     setup(false);
     const myCartHeading = screen.getByRole('heading', { name: /my cart/i });
     const reservation = screen.getByText('Items are reserved for 60 minutes');
 
     expect(myCartHeading).toBeInTheDocument();
     expect(reservation).toBeInTheDocument();
-  });
-
-  test('displays empty cart message', () => {
-    setup(false);
-
     expect(screen.getByText('Cart is empty')).toBeInTheDocument();
   });
 
@@ -84,15 +63,11 @@ describe('Section: Cart list', () => {
 
     expect(itemList).toHaveLength(2);
     expect(dividers).toHaveLength(2);
-    expect(fetch).toHaveBeenCalledWith('https://fakestoreapi.com/products/1');
-    expect(fetch).toHaveBeenCalledWith('https://fakestoreapi.com/products/2');
   });
 
   test('has subtotal below items', async () => {
     setup(true);
     const cartList = screen.getByTestId('cart-list');
-    // Wait to find subtotal until after items are displayed
-    await screen.findAllByTestId('cart-item');
     const subtotalText = await within(cartList).findByRole('heading', {
       name: /subtotal/i,
       level: 2,
@@ -100,7 +75,7 @@ describe('Section: Cart list', () => {
 
     expect(cartList).toContain(subtotalText);
     expect(subtotalText.textContent).toMatch(
-      `Subtotal $${getSubtotal(fakeCart)}`
+      `Subtotal $${getSubtotal(fakeMiniCart)}`
     );
   });
 });
@@ -123,7 +98,7 @@ describe('Section: Total Column', () => {
 
     expect(totalColumn).toContain(subtotalText);
     expect(subtotalText.textContent).toMatch(
-      `Subtotal $${getSubtotal(fakeCart)}`
+      `Subtotal $${getSubtotal(fakeMiniCart)}`
     );
   });
 

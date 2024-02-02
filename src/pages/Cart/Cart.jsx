@@ -1,49 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { fetchItem } from '../../utils/fetch-data';
 import paymentsImg from '../../assets/payment-methods.png';
 import CartItem from './CartItem';
 
 export default function Cart() {
   const { miniCart } = useOutletContext();
-  const [cart, setCart] = useState([]);
-  console.log('Cart: ', cart);
 
-  const cartIsReady = !!cart.length;
+  const cartIsReady = !!miniCart.length;
 
-  useEffect(() => {
-    let ignore = false;
-    async function getItemData(item) {
-      const itemData = await fetchItem(item.id);
-      if (!ignore)
-        setCart((currentCart) => {
-          const duplicateIndex = currentCart.findIndex(
-            (curr) => curr.product.id === item.id
-          );
-          if (duplicateIndex < 0) {
-            return currentCart.concat({
-              product: itemData,
-              quantity: item.quantity,
-            });
-          }
-          return currentCart.splice(duplicateIndex, 1);
-        });
-    }
-
-    miniCart.forEach((item) => {
-      getItemData(item);
-    });
-
-    return () => {
-      ignore = true;
-    };
-  }, [miniCart]);
-
-  function getSubtotal(cartData) {
-    return cartData.reduce(
-      (acc, curr) => acc + curr.product.price * curr.quantity,
-      0
-    );
+  function getSubtotal() {
+    return miniCart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
   }
 
   return (
@@ -55,10 +21,10 @@ export default function Cart() {
         </div>
         {cartIsReady ? (
           <div className="cart-items">
-            {cart.map((item) => (
-              <div className="item-container" key={item.product.id}>
+            {miniCart.map((item) => (
+              <div className="item-container" key={item.id}>
                 <hr />
-                <CartItem item={item} handlers={[() => {}]} />
+                <CartItem item={item} />
               </div>
             ))}
           </div>
@@ -67,7 +33,7 @@ export default function Cart() {
         )}
         <h2 className="subtotal">
           <span className="label">Subtotal </span>
-          <span className="value">${getSubtotal(cart)}</span>
+          <span className="value">${getSubtotal()}</span>
         </h2>
       </section>
       <section className="total-column" data-testid="total-column">
@@ -75,7 +41,7 @@ export default function Cart() {
         <hr />
         <h3 className="subtotal">
           <span className="label">Subtotal </span>
-          <span className="value">${getSubtotal(cart)}</span>
+          <span className="value">${getSubtotal()}</span>
         </h3>
         <DeliveryRow />
         <select name="delivery-options" id="delivery-options">
