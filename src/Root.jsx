@@ -8,7 +8,6 @@ export default function Root() {
   return (
     <>
       <Header miniCart={miniCart} />
-      <div>hi</div>
       <Outlet context={{ miniCart }} />
       <Footer />
     </>

@@ -1,0 +1,14 @@
+.homeLink {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+header .homeLink:hover {
+  color: white;
+  text-shadow: 0px 0px 10px black;
+}
+
+footer .homeLink:hover {
+  color: #e0e0e0;
+}

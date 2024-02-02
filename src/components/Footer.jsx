@@ -1,21 +1,25 @@
 import HomeLink from './ui/HomeLink';
+import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
     <footer>
-      <div className="flex-container">
-        <HomeLink />
+      <div className={styles.flexContainer}>
+        <div className={styles.linkContainer}>
+          <HomeLink />
+        </div>
         <FakeLinks />
       </div>
-      <div className="copyright">
+      <div className={styles.copyright}>
         <a
           href="https://github.com/marlatte"
           target="_blank"
           rel="noreferrer"
           aria-label="Marlatte's Github"
+          className={styles.copyrightLink}
         >
           <p>Walker</p>
-          <i className="fa fa-github" aria-hidden />
+          <i className={`${styles.githubIcon} fa fa-github`} aria-hidden />
           <p>Marlatt</p>
         </a>
       </div>
@@ -25,7 +29,7 @@ export default function Footer() {
 
 function FakeLinks() {
   return (
-    <div>
+    <div className={styles.fakeLinks}>
       {[
         'Connect',
         'Twitter',
@@ -42,7 +46,12 @@ function FakeLinks() {
         'Press',
         'Careers',
       ].map((text) => (
-        <div key={text} className="fake-link" data-testid="fake-link">
+        <div
+          key={text}
+          className={styles.fakeLink}
+          data-testid="fake-link"
+          title="Not really a link."
+        >
           {text}
         </div>
       ))}
