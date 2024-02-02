@@ -12,7 +12,7 @@ export default function CallToAction() {
     if (showToast) {
       setTimeout(() => {
         setShowToast(false);
-      }, 3000);
+      }, 5000);
     }
   }, [showToast]);
 
@@ -34,6 +34,7 @@ export default function CallToAction() {
             name="email"
             id="email"
             placeholder="Enter your email..."
+            autoComplete="email"
           />
         </label>
         <button type="submit">Subscribe</button>

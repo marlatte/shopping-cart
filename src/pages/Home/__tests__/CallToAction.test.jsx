@@ -7,7 +7,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CallToAction from '../CallToAction';
-import toastAction from '../toast-action';
+import toastAction from '../newsletter-action';
 
 function setup() {
   const router = createBrowserRouter([
@@ -76,28 +76,32 @@ test('shows a toast with submitted email', async () => {
   expect(successMsg).toBe(`Thanks for subscribing, ${testEmail}!`);
 });
 
-test('toast goes away after 10 seconds', async () => {
-  const user = userEvent.setup();
-  setup();
-  const subscribeBtn = screen.getByRole('button', { name: /subscribe/i });
+test(
+  'toast goes away after 10 seconds',
+  async () => {
+    const user = userEvent.setup();
+    setup();
+    const subscribeBtn = screen.getByRole('button', { name: /subscribe/i });
 
-  await user.click(subscribeBtn);
+    await user.click(subscribeBtn);
 
-  const toast = screen.queryByRole('alert', {
-    name: /subscribe successful/i,
-  });
-
-  expect(toast).toBeInTheDocument();
-
-  await waitForElementToBeRemoved(
-    screen.queryByRole('alert', {
+    const toast = screen.queryByRole('alert', {
       name: /subscribe successful/i,
-    }),
-    { timeout: 3060 }
-  );
+    });
 
-  expect(toast).not.toBeInTheDocument();
-});
+    expect(toast).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(
+      screen.queryByRole('alert', {
+        name: /subscribe successful/i,
+      }),
+      { timeout: 5060 }
+    );
+
+    expect(toast).not.toBeInTheDocument();
+  },
+  { timeout: 6000 }
+);
 
 test('toast can be closed manually', async () => {
   const user = userEvent.setup();
