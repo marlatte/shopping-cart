@@ -14,22 +14,22 @@ export default function NavMenu({ onClick }) {
           ×
         </button>
         <nav>
-          <NavLink to="/">
+          <NavLink to="/" onClick={onClick}>
             <h2>Home</h2>
           </NavLink>
-          <NavLink to="/products/women">
+          <NavLink to="/products/women" onClick={onClick}>
             <h2>Women</h2>
           </NavLink>
-          <NavLink to="/products/men">
+          <NavLink to="/products/men" onClick={onClick}>
             <h2>Men</h2>
           </NavLink>
-          <NavLink to="/products/jewelry">
+          <NavLink to="/products/jewelry" onClick={onClick}>
             <h2>Jewelry</h2>
           </NavLink>
-          <NavLink to="/products/electronics">
+          <NavLink to="/products/electronics" onClick={onClick}>
             <h2>Electronics</h2>
           </NavLink>
-          <NavLink to="/products/">
+          <NavLink to="/products/" onClick={onClick}>
             <h2>All</h2> Products
           </NavLink>
         </nav>
