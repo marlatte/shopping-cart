@@ -1,19 +1,25 @@
 const cart = new Map();
 
 export function get() {
-  return [...cart].map(([id, quantity]) => ({ id, quantity }));
+  return [...cart].map(([id, { quantity, price }]) => ({
+    id,
+    quantity,
+    price,
+  }));
 }
 
 export function plus(id) {
-  cart.set(id, cart.get(id) + 1);
+  const { quantity, price } = cart.get(id);
+  cart.set(id, { quantity: quantity + 1, price });
 }
 
 export function minus(id) {
-  cart.set(id, cart.get(id) - 1);
+  const { quantity, price } = cart.get(id);
+  cart.set(id, { quantity: quantity - 1, price });
 }
 
-export function addNew(id) {
-  if (!cart.has(id)) cart.set(id, 1);
+export function addNew(id, price) {
+  if (!cart.has(id)) cart.set(id, { quantity: 1, price });
   else plus(id);
 }
 
@@ -25,7 +31,9 @@ export function remove(id) {
   cart.delete(id);
 }
 
-export function update(id, quantity) {
-  const valid = cart.has(id) && typeof quantity === 'number' && quantity > 0;
-  if (valid) cart.set(id, quantity);
+export function update(id, newQuantity) {
+  const valid =
+    cart.has(id) && typeof newQuantity === 'number' && newQuantity > 0;
+  const { price } = cart.get(id);
+  if (valid) cart.set(id, { quantity: newQuantity, price });
 }

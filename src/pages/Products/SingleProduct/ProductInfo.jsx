@@ -42,6 +42,7 @@ export default function ProductInfo({ product }) {
         <button type="submit" name="id" value={id}>
           Add to cart
         </button>
+        <input type="hidden" name="price" value={price} />
       </fetcher.Form>
       {showToast && (
         <Toast
