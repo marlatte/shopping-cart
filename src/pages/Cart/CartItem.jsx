@@ -4,7 +4,6 @@ import { Link, useFetcher } from 'react-router-dom';
 import { fetchItem } from '../../utils/fetch-data';
 
 export default function CartItem({ item }) {
-  console.log('Cart Item');
   const [product, setProduct] = useState({});
   const { id, quantity, price } = item;
   const quantityFetcher = useFetcher('update-quantity');
