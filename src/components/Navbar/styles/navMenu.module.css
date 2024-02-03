@@ -19,7 +19,6 @@ nav {
   margin-top: 50px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
 }
 
 .menuBtn {
@@ -28,20 +27,21 @@ nav {
 }
 
 .navLink {
+  padding: 7px;
   text-transform: uppercase;
   font-weight: 200;
   font-size: 2rem;
   letter-spacing: 1px;
 }
 
-.navLink:hover {
-  text-decoration: underline;
-  text-underline-offset: 6px;
-}
+.navLink:hover::after,
+.navLink:focus::after {
+  position: relative;
+  display: inline-block;
 
-/* Not working yet!! */
-.active {
-  color: red;
+  content: '';
+  border: 12px solid transparent;
+  border-right-color: #000;
 }
 
 .menuBackdrop {

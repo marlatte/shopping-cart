@@ -25,6 +25,11 @@ a {
   text-decoration: unset;
 }
 
+a.active {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
 h1,
 h2,
 h3,

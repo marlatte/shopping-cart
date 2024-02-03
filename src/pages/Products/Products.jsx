@@ -16,6 +16,7 @@ export default function Products() {
       men: "men's clothing",
       jewelry: 'jewelery',
       electronics: 'electronics',
+      all: '',
     };
 
     let ignore = false;
@@ -35,7 +36,7 @@ export default function Products() {
   return (
     <main className="products">
       <h1 className="title">
-        {convertToTitleCase(category || 'all products')}
+        {convertToTitleCase(category === 'all' ? 'all products' : category)}
       </h1>
       <div className="cards-grid">
         {productsAreReady &&

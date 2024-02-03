@@ -9,7 +9,7 @@ export default function NavMenu({ onClick }) {
     ['Men', '/products/men'],
     ['Jewelry', '/products/jewelry'],
     ['Electronics', '/products/electronics'],
-    ['All Products', '/products'],
+    ['All Products', '/products/all'],
   ];
   return (
     <>
