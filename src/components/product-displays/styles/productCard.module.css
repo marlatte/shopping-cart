@@ -1,0 +1,12 @@
+.productCard {
+  padding: 20px;
+}
+
+.imgFrame {
+  padding: 30px;
+  border: 2px solid #000;
+}
+
+.imgFrame img {
+  width: 100px;
+}

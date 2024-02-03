@@ -16,6 +16,7 @@
 
 body {
   display: flex;
+  flex-direction: column;
   min-height: 100svh;
   width: 100%;
 }
@@ -50,7 +51,12 @@ button {
 }
 
 #root {
-  width: 100%;
+  flex: 1;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
 }
 
 /* @media (prefers-color-scheme: light) {

@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import css from './styles/productCard.module.css';
 
 export default function ProductCard({ data }) {
   const url = `/product/${data.id}`;
   return (
-    <Link to={url} className="product-card" data-testid="product card">
+    <Link to={url} className={css.productCard} data-testid="product card">
       <div className="img-container">
-        <img src={data.image} alt={data.title} />
+        <div className={css.imgFrame}>
+          <img src={data.image} alt={data.title} />
+        </div>
       </div>
       <div className="card-body">
         <h4 className="card-title truncate" title={data.title}>
