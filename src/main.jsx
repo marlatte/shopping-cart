@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Root from './Root';
-import ErrorPage from './ErrorPage';
+import ErrorPage from './components/ErrorPage';
 import { Pages, loaders, actions } from './pages/pages';
 import './index.css';
 import rootLoader from './root-loader';
