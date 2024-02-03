@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { homeLink } from './HomeLink.module.css';
+import { homeLink } from './homeLink.module.css';
 
 export default function HomeLink() {
   return (
