@@ -1,5 +1,5 @@
 import { useRouteError } from 'react-router-dom';
-import css from './errorPage.module.css';
+import css from './styles/errorPage.module.css';
 import HomeLink from './ui/HomeLink';
 
 export default function ErrorPage() {

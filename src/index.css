@@ -14,19 +14,27 @@
   /* color-scheme: light dark; */
 }
 
-a {
-  color: unset;
-  text-decoration: unset;
-}
-
 body {
   display: flex;
   min-height: 100svh;
   width: 100%;
 }
 
+a {
+  color: unset;
+  text-decoration: unset;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  all: unset;
+}
+
 button {
-  padding: 5px 10px;
   border: 1px solid transparent;
   font-size: 1rem;
   font-family: inherit;

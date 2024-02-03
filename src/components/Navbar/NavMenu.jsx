@@ -1,40 +1,43 @@
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import css from './styles/navMenu.module.css';
 
 export default function NavMenu({ onClick }) {
+  const linkData = [
+    ['Home', '/'],
+    ['Women', '/products/women'],
+    ['Men', '/products/men'],
+    ['Jewelry', '/products/jewelry'],
+    ['Electronics', '/products/electronics'],
+    ['All Products', '/products'],
+  ];
   return (
     <>
       <menu>
         <button
           type="button"
           aria-label="Close Menu"
-          className="close-menu-btn"
+          className={`close-menu-btn ${css.menuBtn}`}
           onClick={onClick}
         >
-          ×
+          <div className={css.symbol}>
+            <i className="fa fa-times" aria-hidden="true" />
+          </div>
         </button>
         <nav>
-          <NavLink to="/" onClick={onClick}>
-            <h2>Home</h2>
-          </NavLink>
-          <NavLink to="/products/women" onClick={onClick}>
-            <h2>Women</h2>
-          </NavLink>
-          <NavLink to="/products/men" onClick={onClick}>
-            <h2>Men</h2>
-          </NavLink>
-          <NavLink to="/products/jewelry" onClick={onClick}>
-            <h2>Jewelry</h2>
-          </NavLink>
-          <NavLink to="/products/electronics" onClick={onClick}>
-            <h2>Electronics</h2>
-          </NavLink>
-          <NavLink to="/products/" onClick={onClick}>
-            <h2>All</h2> Products
-          </NavLink>
+          {linkData.map(([text, path]) => (
+            <NavLink
+              key={text}
+              to={path}
+              onClick={onClick}
+              className={css.navLink}
+            >
+              <h2>{text}</h2>
+            </NavLink>
+          ))}
         </nav>
       </menu>
-      <div className="menu-backdrop" />
+      <div className={css.menuBackdrop} onClick={onClick} aria-hidden="true" />
     </>
   );
 }

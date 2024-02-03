@@ -1,0 +1,54 @@
+menu {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100svh;
+  width: min(80vw, 360px);
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #fff;
+  border-right: 2px solid black;
+  box-shadow: 2px 0 5px black;
+}
+
+nav {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menuBtn {
+  composes: btn from './header.module.css';
+  align-self: end;
+}
+
+.navLink {
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* Not working yet!! */
+.active {
+  color: red;
+}
+
+.menuBackdrop {
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsla(0, 0%, 70%, 0.6);
+  backdrop-filter: blur(2px);
+}

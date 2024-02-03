@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import CartButton from './CartButton';
 import NavMenu from './NavMenu';
 import HomeLink from '../ui/HomeLink';
+import css from './styles/header.module.css';
 
 export default function Header({ miniCart }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,18 +22,20 @@ export default function Header({ miniCart }) {
           }}
         />
       )}
-      <button
-        type="button"
-        aria-label="Menu"
-        className="open-menu-btn"
-        onClick={() => {
-          setMenuOpen(true);
-        }}
-      >
-        ☰
-      </button>
-      <HomeLink />
-      <CartButton miniCart={miniCart} />
+      <div className={css.content}>
+        <button
+          type="button"
+          aria-label="Menu"
+          className={`open-menu-btn ${css.btn}`}
+          onClick={() => {
+            setMenuOpen(true);
+          }}
+        >
+          <div className={css.symbol}>☰</div>
+        </button>
+        <HomeLink />
+        <CartButton miniCart={miniCart} />
+      </div>
     </header>
   );
 }

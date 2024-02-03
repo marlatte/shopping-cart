@@ -1,0 +1,10 @@
+.cartBtn {
+  padding: 5px 10px;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+.cartBtn:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
