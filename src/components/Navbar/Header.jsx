@@ -7,11 +7,11 @@ import css from './styles/header.module.css';
 
 export default function Header({ miniCart }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [focusedClassName, setFocusedClassName] = useState('none');
 
   useEffect(() => {
-    const focusedClassName = menuOpen ? '.close-menu-btn' : '.open-menu-btn';
-    document.querySelector(focusedClassName).focus();
-  }, [menuOpen]);
+    document.querySelector(focusedClassName)?.focus();
+  }, [focusedClassName]);
 
   return (
     <header>
@@ -19,6 +19,7 @@ export default function Header({ miniCart }) {
         <NavMenu
           onClick={() => {
             setMenuOpen(false);
+            setFocusedClassName('.open-menu-btn');
           }}
         />
       )}
@@ -29,6 +30,7 @@ export default function Header({ miniCart }) {
           className={`open-menu-btn ${css.btn}`}
           onClick={() => {
             setMenuOpen(true);
+            setFocusedClassName('.close-menu-btn');
           }}
         >
           <div className={css.symbol}>☰</div>
