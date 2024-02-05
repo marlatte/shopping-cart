@@ -1,12 +1,49 @@
 .home {
-  gap: 100px;
+  gap: 70px;
 }
 
 .hero {
   display: flex;
   flex-direction: column-reverse;
+  align-items: center;
+}
+
+.text {
+  position: relative;
+  top: -30px;
+  width: 90%;
+  padding: 5px 10px 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  border-radius: 5px;
+  outline: 1px solid black;
+  background-color: #fff;
+}
+
+.heroHeading {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.hero p {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.btn {
+  composes: btn from '../../../root.module.css';
+}
+
+.btnCaps {
+  composes: btnCaps from '../../../root.module.css';
 }
 
 .hero img {
   max-width: 100%;
+  border: 5px solid black;
 }

@@ -36,7 +36,9 @@ export default function Products() {
   return (
     <main className="products">
       <h1 className="title">
-        {convertToTitleCase(category === 'all' ? 'all products' : category)}
+        {convertToTitleCase(
+          category === 'all' || !category ? 'all products' : category
+        )}
       </h1>
       <div className="cards-grid">
         {productsAreReady &&
