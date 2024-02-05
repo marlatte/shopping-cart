@@ -12,6 +12,7 @@
 :root {
   font-family: 'Kanit', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   /* color-scheme: light dark; */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -38,10 +39,22 @@ h4,
 h5,
 h6 {
   all: unset;
+  text-transform: uppercase;
 }
 
 button {
   border: 1px solid transparent;
+  background-color: unset;
+  outline-offset: 2px;
+}
+
+input {
+  appearance: none;
+  font-size: unset;
+  font-family: unset;
+  border: 1px solid black;
+  border-radius: unset;
+  outline-offset: 2px;
 }
 
 #root {
@@ -58,7 +71,9 @@ main {
 }
 
 img {
-  max-width: 100px;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
 }
 
 /* @media (prefers-color-scheme: light) {

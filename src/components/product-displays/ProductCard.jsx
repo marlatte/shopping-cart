@@ -7,19 +7,17 @@ export default function ProductCard({ data }) {
   return (
     <div className={css.productCard}>
       <Link to={url} data-testid="product card">
-        <div className="img-container">
-          <div className={css.imgFrame}>
-            <img src={data.image} alt={data.title} />
-          </div>
+        <div className={css.imgFrame}>
+          <img src={data.image} alt={data.title} />
         </div>
-        <div className="card-body">
-          <h4 className="card-title truncate" title={data.title}>
-            {data.title}
-          </h4>
+        <div className={css.cardBody}>
           <p
             className="price"
             aria-label={`Price: $${data.price}`}
           >{`$${data.price}`}</p>
+          <h4 className="card-title truncate" title={data.title}>
+            {data.title}
+          </h4>
         </div>
       </Link>
     </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useFetcher } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import css from './styles/callToAction.module.css';
 
 export default function CallToAction() {
   const [showToast, setShowToast] = useState(false);
@@ -17,27 +18,31 @@ export default function CallToAction() {
   }, [showToast]);
 
   return (
-    <section className="cta">
-      <h3>Upgrade your style</h3>
-      <p>Get 15% off your next order by subscribing to our newsletter!</p>
+    <section className={css.cta}>
+      <h3 className={css.ctaHeading}>Upgrade your style</h3>
+      <p>
+        Get <strong>15% off</strong> your next order&nbsp;by <br />
+        subscribing to our newsletter!
+      </p>
       <fetcher.Form
         aria-label="Subscribe to our Newsletter"
+        className={css.subscribe}
         method="post"
         onSubmit={() => {
           setShowToast(true);
         }}
       >
-        <label>
-          Email
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter your email..."
-            autoComplete="email"
-          />
-        </label>
-        <button type="submit">Subscribe</button>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Enter your email..."
+          autoComplete="email"
+          aria-label="email"
+        />
+        <button className={css.btn} type="submit">
+          Subscribe
+        </button>
       </fetcher.Form>
       {showToast && (
         <Toast
@@ -53,12 +58,14 @@ export default function CallToAction() {
 
 function Toast({ email, onClick }) {
   return (
-    <div className="toast" role="alert" aria-label="Subscribe Successful">
-      <p>Thanks for subscribing, {email}!</p>
+    <div className={css.toast} role="alert" aria-label="Subscribe Successful">
+      <p>
+        Thanks for subscribing, <span className={css.toastEmail}>{email}</span>!
+      </p>
       <button
         type="button"
         aria-label="Close Toast"
-        className="close-toast-btn"
+        className={css.closeToastBtn}
         onClick={onClick}
       >
         ×

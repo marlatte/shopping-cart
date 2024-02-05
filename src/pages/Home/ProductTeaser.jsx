@@ -7,7 +7,7 @@ import { fetchItems, getRandom3 } from '../../utils/fetch-data';
 export default function ProductTeaser() {
   const [products, setProducts] = useState([]);
 
-  const teaserIsReady = false;
+  const teaserIsReady = !!products.length;
 
   useEffect(() => {
     let ignore = false;
@@ -26,7 +26,9 @@ export default function ProductTeaser() {
   return (
     <section className={css.productTeaser}>
       <div className={css.text}>
-        <h3 className={css.teaserHeading}>Check out our new&nbsp;arrivals</h3>
+        <h3 className={css.teaserHeading}>
+          Check out our <strong>new&nbsp;arrivals</strong>
+        </h3>
         <p>
           We might be known for our sick threads, but we&apos;ve also got a
           sleek selection of jewelry.
@@ -35,12 +37,10 @@ export default function ProductTeaser() {
           Shop <span className={css.jewelryCaps}>jewelry</span>
         </Link>
       </div>
-      <div className={css.cards}>
-        {teaserIsReady &&
-          products.map((product) => (
-            <ProductCard key={product.id} data={product} />
-          ))}
-      </div>
+      {teaserIsReady &&
+        products.map((product) => (
+          <ProductCard key={product.id} data={product} />
+        ))}
     </section>
   );
 }

@@ -1,22 +1,16 @@
 .productTeaser {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 40px;
 }
 
 .text {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 38px;
 }
 
 .teaserHeading {
-  text-align: center;
-  text-transform: uppercase;
   font-size: 1.4rem;
   font-weight: 300;
 }
@@ -27,4 +21,14 @@
 
 .jewelryCaps {
   composes: btnCaps from '../../../root.module.css';
+}
+
+@media (min-width: 700px) {
+  .productTeaser {
+    width: min(1200px, 100%);
+  }
+
+  .text {
+    gap: 48px;
+  }
 }
