@@ -2,20 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Root from './Root';
-import ErrorPage from './components/ErrorPage';
+import MainError from './components/MainError';
+import ChildError from './components/ChildError';
 import { Pages, loaders, actions } from './pages/pages';
-import './index.module.css';
+import './index.css';
 import rootLoader from './root-loader';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    errorElement: <ErrorPage />,
+    errorElement: <MainError />,
     loader: rootLoader,
     children: [
       {
-        errorElement: <ErrorPage />,
+        errorElement: <ChildError />,
         children: [
           {
             index: true,
