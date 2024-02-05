@@ -4,6 +4,7 @@ import CallToAction from './CallToAction';
 import Articles from './Articles';
 import ProductTeaser from './ProductTeaser';
 import { getRandom3, fetchItems } from '../../utils/fetch-data';
+import css from './styles/home.module.css';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -23,10 +24,10 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="home">
+    <main className={css.home}>
       <Hero />
       <ProductTeaser products={products} />
-      <Articles />
+      {/* <Articles /> */}
       <CallToAction />
     </main>
   );

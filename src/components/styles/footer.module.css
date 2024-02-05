@@ -1,15 +1,14 @@
 footer {
-  display: flex;
-  flex-direction: column;
-
   background-color: black;
   color: white;
 }
 
 .flexContainer {
-  padding: 80px;
+  width: 100%;
+  padding: 40px;
   display: flex;
-  gap: 150px;
+  flex-wrap: wrap;
+  gap: 50px;
 }
 
 .linkContainer {
@@ -17,11 +16,16 @@ footer {
 }
 
 .fakeLinks {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 16px;
-  column-gap: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 70px;
+  row-gap: 30px;
+}
+
+.fakeLinkColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
 }
 
 .fakeLink:hover {
@@ -32,6 +36,7 @@ footer {
   display: flex;
   padding: 10px;
   justify-content: center;
+  border-top: 1px solid #fff;
 }
 
 .copyrightLink {
@@ -62,3 +67,15 @@ footer {
   transform: rotate(-360deg) scale(1.5);
   color: white;
 }
+
+/* @media (min-width: 700px) {
+  .flexContainer {
+    flex-direction: row;
+    gap: 150px;
+  }
+
+  .fakeLinks {
+    grid-auto-flow: column;
+    grid-template-rows: repeat(5, 1fr);
+  }
+} */

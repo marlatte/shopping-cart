@@ -1,0 +1,25 @@
+.productTeaser {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.teaserHeading {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+.jewelryLink {
+  composes: btn from '../../../index.module.css';
+}
