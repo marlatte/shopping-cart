@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import css from './styles/productCard.module.css';
 
-export default function ProductCard({ data }) {
+export default function ProductCard({ data, homepage }) {
   const url = `/product/${data.id}`;
   return (
     <div className={css.productCard}>
       <Link to={url} data-testid="product card">
-        <div className={css.imgFrame}>
+        <div className={homepage ? css.imgFrameHome : css.imgFrame}>
           <img src={data.image} alt={data.title} />
         </div>
         <div className={css.cardBody}>
@@ -37,4 +37,9 @@ ProductCard.propTypes = {
       count: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
+  homepage: PropTypes.bool,
+};
+
+ProductCard.defaultProps = {
+  homepage: false,
 };

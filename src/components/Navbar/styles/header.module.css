@@ -1,3 +1,11 @@
+.stickyHeader {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  width: 100vw;
+  background-color: #fff;
+}
+
 .content {
   padding: 10px 10px 10px 5px;
   display: flex;
@@ -29,7 +37,7 @@
 @media (min-width: 700px) {
   .content {
     padding: 10px 20px;
-    width: min(2000px, 100%);
+    width: min(1300px, 100%);
     margin: auto;
   }
 }

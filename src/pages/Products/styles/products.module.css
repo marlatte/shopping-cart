@@ -1,0 +1,17 @@
+.category {
+  font-size: 1.6rem;
+  margin-bottom: 30px;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+@media (min-width: 700px) {
+  .cardGrid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 50px;
+  }
+}

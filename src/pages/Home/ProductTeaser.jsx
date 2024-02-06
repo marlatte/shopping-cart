@@ -39,7 +39,7 @@ export default function ProductTeaser() {
       </div>
       {teaserIsReady &&
         products.map((product) => (
-          <ProductCard key={product.id} data={product} />
+          <ProductCard key={product.id} data={product} homepage />
         ))}
     </section>
   );

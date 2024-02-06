@@ -14,7 +14,7 @@ export default function Header({ miniCart }) {
   }, [focusedClassName]);
 
   return (
-    <header>
+    <header className={css.stickyHeader}>
       {menuOpen && (
         <NavMenu
           onClick={() => {

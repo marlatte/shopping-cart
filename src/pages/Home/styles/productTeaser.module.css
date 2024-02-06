@@ -1,4 +1,5 @@
 .productTeaser {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   gap: 40px;
@@ -27,12 +28,9 @@
 }
 
 @media (min-width: 700px) {
-  .productTeaser {
-    width: min(1200px, 100%);
-  }
-
   .text {
-    gap: 48px;
+    height: 300px;
+    justify-content: space-between;
   }
 
   .text p {
