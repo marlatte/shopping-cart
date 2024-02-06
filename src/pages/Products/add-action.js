@@ -1,4 +1,4 @@
-import { addNew } from '../../../cartController';
+import { addNew } from '../../cartController';
 
 export default async function action({ request }) {
   const formData = await request.formData();

@@ -1,12 +1,12 @@
 import Home from './Home/Home';
 import Cart from './Cart/Cart';
 import Products from './Products/Products';
-import SingleProduct from './Products/SingleProduct/SingleProduct';
+import SingleProduct from './Products/SingleProduct';
 
 import { singleLoader, multiLoader } from './Products/products-loaders';
 
 import newsletterAction from './Home/newsletter-action';
-import addToCart from './Products/SingleProduct/add-action';
+import addToCart from './Products/add-action';
 import removeFromCart from './Cart/remove-action';
 import updateCart from './Cart/update-action ';
 

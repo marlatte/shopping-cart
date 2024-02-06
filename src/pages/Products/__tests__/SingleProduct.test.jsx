@@ -2,13 +2,13 @@ import { expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import SingleProduct from '../SingleProduct';
-import { singleLoader } from '../../products-loaders';
+import { singleLoader } from '../products-loaders';
 import {
   convertToHref,
   convertToTitleCase,
   sanitizeProduct,
-} from '../../../../utils/conversions';
-import allProducts from '../../__tests__/allProducts';
+} from '../../../utils/conversions';
+import allProducts from './allProducts';
 
 const testProduct1 = allProducts[0];
 const testProduct2 = sanitizeProduct(allProducts[1]);

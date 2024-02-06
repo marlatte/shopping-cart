@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { fetchItem } from '../../../utils/fetch-data';
-import { convertToHref, convertToTitleCase } from '../../../utils/conversions';
+import { fetchItem } from '../../utils/fetch-data';
+import { convertToHref, convertToTitleCase } from '../../utils/conversions';
 import ProductInfo from './ProductInfo';
 
 export default function SingleProduct() {
