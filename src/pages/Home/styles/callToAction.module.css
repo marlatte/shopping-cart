@@ -24,7 +24,6 @@
 .btn {
   composes: btn from '../../../root.module.css';
   flex: 1;
-  padding: 20px;
 }
 
 .toast {

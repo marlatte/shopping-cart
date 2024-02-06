@@ -4,8 +4,9 @@ footer {
 }
 
 .flexContainer {
-  width: 100%;
+  width: min(1200px, 100%);
   padding: 40px;
+
   display: flex;
   flex-wrap: wrap;
   gap: 50px;
@@ -68,14 +69,9 @@ footer {
   color: white;
 }
 
-/* @media (min-width: 700px) {
+@media (min-width: 700px) {
   .flexContainer {
-    flex-direction: row;
-    gap: 150px;
+    margin: auto;
+    justify-content: space-evenly;
   }
-
-  .fakeLinks {
-    grid-auto-flow: column;
-    grid-template-rows: repeat(5, 1fr);
-  }
-} */
+}
