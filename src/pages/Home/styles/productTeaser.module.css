@@ -7,7 +7,10 @@
 .text {
   display: flex;
   flex-direction: column;
-  gap: 38px;
+}
+
+.text p {
+  padding: 10px 0 40px;
 }
 
 .teaserHeading {
@@ -30,5 +33,9 @@
 
   .text {
     gap: 48px;
+  }
+
+  .text p {
+    padding: 0;
   }
 }

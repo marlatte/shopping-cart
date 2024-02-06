@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import shirtsUrl from '../../assets/shirts-on-hanger.jpg';
 import modelUrl from '../../assets/model-in-field.jpg';
+import css from './styles/home.module.css';
 
 export default function Articles() {
   return (
-    <section className="articles">
+    <section className={css.articles}>
       <Entry
         imgUrl={shirtsUrl}
         imgAlt="Shirts on a hanger"
@@ -21,13 +22,11 @@ export default function Articles() {
 
 function Entry({ imgUrl, imgAlt, title }) {
   return (
-    <div className="entry">
-      <div className="fake-link">
-        <img src={imgUrl} alt={imgAlt} />
-      </div>
-      <div className="fake-link">
-        <h3>{title}</h3>
-      </div>
+    <div className={css.entry}>
+      <img src={imgUrl} alt={imgAlt} title="Not a real link" />
+      <h3 className={css.articleTitle} title="Not a real link">
+        {title}
+      </h3>
     </div>
   );
 }

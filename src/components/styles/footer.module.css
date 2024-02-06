@@ -29,6 +29,10 @@ footer {
   gap: 13px;
 }
 
+.fakeLink {
+  cursor: default;
+}
+
 .fakeLink:hover {
   color: #e5e5e5;
 }

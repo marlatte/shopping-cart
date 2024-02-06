@@ -8,6 +8,10 @@
   font-weight: 300;
 }
 
+/* ------------------------------------ */
+/* --------------- Hero --------------- */
+/* ------------------------------------ */
+
 .hero {
   display: flex;
   flex-direction: column-reverse;
@@ -50,6 +54,32 @@
 .hero img {
   max-width: 100%;
   border: 5px solid black;
+}
+
+/* ---------------------------------------- */
+/* --------------- Articles --------------- */
+/* ---------------------------------------- */
+
+.articles {
+  width: min(1200px, 100%);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  row-gap: 40px;
+  column-gap: 20px;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.entry img {
+  display: block;
+}
+
+.articleTitle {
+  text-transform: unset;
 }
 
 @media (min-width: 700px) {
