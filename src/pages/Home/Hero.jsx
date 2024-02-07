@@ -17,7 +17,7 @@ export default function Hero() {
           Shop <span className={css.btnCaps}>All Categories</span>
         </Link>
       </div>
-      <Link to="/products/">
+      <Link to="/products/" className={css.imgLink}>
         <img src={stylishGroupUrl} alt="Shop these styles and more!" />
       </Link>
     </section>

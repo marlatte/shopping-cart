@@ -63,12 +63,12 @@ export default function ProductInfo({ product }) {
 
 function Toast({ onClick }) {
   return (
-    <div className="toast" role="alert" aria-label="Add to Cart Successful">
+    <div className={css.toast} role="alert" aria-label="Add to Cart Successful">
       <p>Product added to cart</p>
       <button
         type="button"
         aria-label="Close Toast"
-        className="close-toast-btn"
+        className={css.closeToastBtn}
         onClick={onClick}
       >
         ×
