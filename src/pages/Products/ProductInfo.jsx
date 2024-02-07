@@ -1,13 +1,18 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useFetcher } from 'react-router-dom';
+import css from './styles/singleProduct.module.css';
+import './styles/star-ratings.css';
 
 export default function ProductInfo({ product }) {
   const fetcher = useFetcher({ key: 'add' });
   const [showToast, setShowToast] = useState(false);
   const { id, title, price, description } = product;
   const { rate: rating, count } = product.rating;
-  const roundedRating = (Math.round((10 * rating) / 5) * 5) / 10;
+  const roundedRating = ((Math.round((10 * rating) / 5) * 5) / 10)
+    .toString()
+    .split('.')
+    .join('-');
 
   useEffect(() => {
     if (showToast) {
@@ -18,28 +23,29 @@ export default function ProductInfo({ product }) {
   }, [showToast]);
 
   return (
-    <section className="product-info">
-      <h1>{title}</h1>
-      <div className="feedback">
+    <section className={css.productInfo}>
+      <h1 className={css.title}>{title}</h1>
+      <div className={css.feedback}>
         <div
-          className={`rating star-${roundedRating}`}
+          className={`${css.rating} star-${roundedRating}`}
           aria-label={`Rating: ${rating} out of 5`}
         >
           {rating}
         </div>
+        <div className={css.divider} />
         <div className="reviews">{count} reviews</div>
       </div>
-      <p className="price" aria-label={`Price: $${price}`}>
+      <p className={css.price} aria-label={`Price: $${price}`}>
         ${price}
       </p>
-      <p className="description">{description}</p>
+      <p className={css.description}>{description}</p>
       <fetcher.Form
         method="post"
         onSubmit={() => {
           setShowToast(true);
         }}
       >
-        <button type="submit" name="id" value={id}>
+        <button className={css.btn} type="submit" name="id" value={id}>
           Add to cart
         </button>
         <input type="hidden" name="price" value={price} />

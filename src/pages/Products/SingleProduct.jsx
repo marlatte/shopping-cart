@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { fetchItem } from '../../utils/fetch-data';
 import { convertToHref, convertToTitleCase } from '../../utils/conversions';
 import ProductInfo from './ProductInfo';
+import css from './styles/singleProduct.module.css';
 
 export default function SingleProduct() {
   const { id } = useLoaderData();
@@ -25,22 +26,24 @@ export default function SingleProduct() {
   }, [id]);
 
   return (
-    <main className="single-product">
+    <main className={css.singleProduct}>
       {productIsReady && (
         <>
-          <div className="breadcrumbs">
+          <div className={css.breadcrumbs}>
             <Link to="/products">All Products</Link>
             <div>&gt;</div>
             <Link to={convertToHref(product.category)}>
               {convertToTitleCase(product.category)}
             </Link>
           </div>
-          <section className="image-container">
-            <div className="frame">
-              <img src={product.image} alt={product.title} />
+          <section className={css.content}>
+            <div className={css.imgContainer}>
+              <div className={css.imgFrame}>
+                <img src={product.image} alt={product.title} />
+              </div>
             </div>
+            <ProductInfo product={product} />
           </section>
-          <ProductInfo product={product} />
         </>
       )}
     </main>
