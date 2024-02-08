@@ -1,4 +1,5 @@
-.singleProduct {
+.mainContent {
+  composes: mainContent from '/src/root.module.css';
   width: min(1400px, 100%);
 }
 

@@ -1,3 +1,7 @@
+.mainContent {
+  composes: mainContent from '/src/root.module.css';
+}
+
 .category {
   font-size: 1.6rem;
   margin-bottom: 30px;

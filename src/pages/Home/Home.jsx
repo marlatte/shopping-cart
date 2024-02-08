@@ -7,10 +7,12 @@ import css from './styles/home.module.css';
 export default function Home() {
   return (
     <main className={css.home}>
-      <Hero />
-      <ProductTeaser />
-      <Articles />
-      <CallToAction />
+      <div className={css.mainContent}>
+        <Hero />
+        <ProductTeaser />
+        <Articles />
+        <CallToAction />
+      </div>
     </main>
   );
 }

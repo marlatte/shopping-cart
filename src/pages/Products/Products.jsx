@@ -36,14 +36,16 @@ export default function Products() {
 
   return (
     <main className="products">
-      <h1 className={css.category}>
-        {convertToTitleCase(
-          category === 'all' || !category ? 'all products' : category
-        )}
-      </h1>
-      <div className={css.cardGrid}>
-        {productsAreReady &&
-          products.map((item) => <ProductCard key={item.id} data={item} />)}
+      <div className={css.mainContent}>
+        <h1 className={css.category}>
+          {convertToTitleCase(
+            category === 'all' || !category ? 'all products' : category
+          )}
+        </h1>
+        <div className={css.cardGrid}>
+          {productsAreReady &&
+            products.map((item) => <ProductCard key={item.id} data={item} />)}
+        </div>
       </div>
     </main>
   );

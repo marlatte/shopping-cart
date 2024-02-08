@@ -1,4 +1,9 @@
 .home {
+  background-color: transparent;
+}
+
+.mainContent {
+  composes: mainContent from '/src/root.module.css';
   gap: 70px;
   align-items: center;
 }

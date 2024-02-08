@@ -26,26 +26,28 @@ export default function SingleProduct() {
   }, [id]);
 
   return (
-    <main className={css.singleProduct}>
-      {productIsReady && (
-        <>
-          <div className={css.breadcrumbs}>
-            <Link to="/products">All Products</Link>
-            <div>&gt;</div>
-            <Link to={convertToHref(product.category)}>
-              {convertToTitleCase(product.category)}
-            </Link>
-          </div>
-          <section className={css.content}>
-            <div className={css.imgContainer}>
-              <div className={css.imgFrame}>
-                <img src={product.image} alt={product.title} />
-              </div>
+    <main className="single-product">
+      <div className={css.mainContent}>
+        {productIsReady && (
+          <>
+            <div className={css.breadcrumbs}>
+              <Link to="/products">All Products</Link>
+              <div>&gt;</div>
+              <Link to={convertToHref(product.category)}>
+                {convertToTitleCase(product.category)}
+              </Link>
             </div>
-            <ProductInfo product={product} />
-          </section>
-        </>
-      )}
+            <section className={css.content}>
+              <div className={css.imgContainer}>
+                <div className={css.imgFrame}>
+                  <img src={product.image} alt={product.title} />
+                </div>
+              </div>
+              <ProductInfo product={product} />
+            </section>
+          </>
+        )}
+      </div>
     </main>
   );
 }

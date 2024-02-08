@@ -30,11 +30,6 @@ body {
 
 main {
   flex: 1;
-  width: min(1300px, 100%);
-  padding: 10px min(80px, 9vw) 40px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
 }
 
 a {

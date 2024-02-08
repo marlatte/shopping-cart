@@ -1,0 +1,7 @@
+.cart {
+  background-color: #9d9d9d;
+}
+
+.mainContent {
+  composes: mainContent from '/src/root.module.css';
+}
