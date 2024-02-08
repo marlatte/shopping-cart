@@ -105,12 +105,22 @@
 
 .toast {
   composes: toast from '/src/pages/Home/styles/callToAction.module.css';
-  z-index: 3;
   left: unset;
-  right: 16px;
-  bottom: unset;
-  top: 60px;
+  right: 2vw;
   gap: 20px;
+  animation-name: toast;
+  animation-duration: 1s;
+  animation-delay: 2s;
+}
+
+@keyframes toast {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 .closeToastBtn {
