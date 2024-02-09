@@ -55,13 +55,19 @@ export default function Cart() {
                     <span className="value">${getSubtotal()}</span>
                   </h3>
                   <DeliveryRow />
-                  <select name="delivery-options" id="delivery-options">
+                  <select
+                    name="delivery-options"
+                    id="delivery-options"
+                    className={css.deliveryOptions}
+                  >
                     <option value="standard">Standard Delivery (Free)</option>
                     <option value="express">Express ($7)</option>
                     <option value="overnight">Overnight ($12)</option>
                   </select>
                 </div>
-                <button type="button">Checkout</button>
+                <button className={css.checkoutBtn} type="button">
+                  Checkout
+                </button>
               </>
             )}
             <div className={css.payments} data-testid="payments">
