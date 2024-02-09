@@ -16,44 +16,53 @@ export default function Cart() {
   return (
     <main className={css.cart}>
       <div className={css.mainContent}>
-        <section className="cart-list" data-testid="cart-list">
-          <div className="header">
+        <section className={css.cartList} data-testid="cart-list">
+          <div className={css.cartHeader}>
             <h1>My Cart</h1>
             <p>Items are reserved for 60 minutes</p>
           </div>
           {cartIsReady ? (
-            <div className="cart-items">
-              {miniCart.map((item) => (
-                <div className="item-container" key={item.id}>
-                  <hr />
-                  <CartItem item={item} />
-                </div>
-              ))}
-            </div>
+            <>
+              <div className="cart-items">
+                {miniCart.map((item, index) => (
+                  <div
+                    className={!index ? css.item : css.firstItem}
+                    key={item.id}
+                  >
+                    <CartItem item={item} />
+                  </div>
+                ))}
+              </div>
+              <h2 className="subtotal">
+                <span className="label">Subtotal </span>
+                <span className="value">${getSubtotal()}</span>
+              </h2>
+            </>
           ) : (
-            <div className="empty-cart">Cart is empty</div>
+            <div className={css.emptyCart}>Cart is empty</div>
           )}
-          <h2 className="subtotal">
-            <span className="label">Subtotal </span>
-            <span className="value">${getSubtotal()}</span>
-          </h2>
         </section>
-        <section className="total-column" data-testid="total-column">
-          <h1>Total</h1>
-          <hr />
-          <h3 className="subtotal">
-            <span className="label">Subtotal </span>
-            <span className="value">${getSubtotal()}</span>
-          </h3>
-          <DeliveryRow />
-          <select name="delivery-options" id="delivery-options">
-            <option value="standard">Standard Delivery (Free)</option>
-            <option value="express">Express ($7)</option>
-            <option value="overnight">Overnight ($12)</option>
-          </select>
-          <hr />
-          <button type="button">Checkout</button>
-          <div className="payments" data-testid="payments">
+        <section className={css.totalColumn} data-testid="total-column">
+          {cartIsReady && (
+            <>
+              <div className={css.cartHeader}>
+                <h1>Total</h1>
+              </div>
+              <h3 className="subtotal">
+                <span className="label">Subtotal </span>
+                <span className="value">${getSubtotal()}</span>
+              </h3>
+              <DeliveryRow />
+              <select name="delivery-options" id="delivery-options">
+                <option value="standard">Standard Delivery (Free)</option>
+                <option value="express">Express ($7)</option>
+                <option value="overnight">Overnight ($12)</option>
+              </select>
+              <hr />
+              <button type="button">Checkout</button>
+            </>
+          )}
+          <div className={css.payments} data-testid="payments">
             <h3>We accept:</h3>
             <img
               src={paymentsImg}

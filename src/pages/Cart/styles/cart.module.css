@@ -4,4 +4,63 @@
 
 .mainContent {
   composes: mainContent from '/src/root.module.css';
+  min-height: 500px;
+  padding-top: 40px;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.cart section {
+  padding: 25px;
+  background-color: #fff;
+}
+
+.cartList {
+  flex: 3;
+  min-width: 250px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cartHeader {
+  padding-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  border-bottom: 1px solid grey;
+}
+
+.cart h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 2rem;
+}
+
+.emptyCart {
+  flex: 1;
+  margin-top: 20px;
+  display: grid;
+  place-content: center;
+  font-size: 1.4rem;
+}
+
+.totalColumn {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.payments {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payments h3 {
+  font-size: 1.3rem;
 }
