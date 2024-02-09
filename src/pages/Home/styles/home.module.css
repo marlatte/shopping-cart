@@ -4,6 +4,7 @@
 
 .mainContent {
   composes: mainContent from '/src/root.module.css';
+  flex-direction: column;
   gap: 70px;
   align-items: center;
 }

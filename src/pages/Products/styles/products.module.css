@@ -1,5 +1,6 @@
 .mainContent {
   composes: mainContent from '/src/root.module.css';
+  flex-direction: column;
 }
 
 .category {

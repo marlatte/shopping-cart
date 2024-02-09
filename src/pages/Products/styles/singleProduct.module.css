@@ -1,6 +1,7 @@
 .mainContent {
   composes: mainContent from '/src/root.module.css';
   width: min(1400px, 100%);
+  flex-direction: column;
 }
 
 .breadcrumbs {

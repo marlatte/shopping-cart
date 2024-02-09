@@ -33,7 +33,7 @@ export default function Cart() {
                   </div>
                 ))}
               </div>
-              <h2 className="subtotal">
+              <h2 className={css.subtotal}>
                 <span className="label">Subtotal </span>
                 <span className="value">${getSubtotal()}</span>
               </h2>
@@ -42,35 +42,38 @@ export default function Cart() {
             <div className={css.emptyCart}>Cart is empty</div>
           )}
         </section>
-        <section className={css.totalColumn} data-testid="total-column">
-          {cartIsReady && (
-            <>
-              <div className={css.cartHeader}>
-                <h1>Total</h1>
-              </div>
-              <h3 className="subtotal">
-                <span className="label">Subtotal </span>
-                <span className="value">${getSubtotal()}</span>
-              </h3>
-              <DeliveryRow />
-              <select name="delivery-options" id="delivery-options">
-                <option value="standard">Standard Delivery (Free)</option>
-                <option value="express">Express ($7)</option>
-                <option value="overnight">Overnight ($12)</option>
-              </select>
-              <hr />
-              <button type="button">Checkout</button>
-            </>
-          )}
-          <div className={css.payments} data-testid="payments">
-            <h3>We accept:</h3>
-            <img
-              src={paymentsImg}
-              alt="Apple Pay, American Express, VISA, VISA Electron, VISA Debit, VISA Carte Bleue, VISA Electron Carte Bleue, VISA Debit Carte Bleue, VISA Purchasing, Maestro, Mastercard, Debit Mastercard, Discover, Diners Club, PayPal, PayPal Pay in 4, 4 easy payments, Afterpay, Cash App Pay, Gift voucher, Google Pay"
-            />
-            <p>Got a discount code? Add it at the next step</p>
-          </div>
-        </section>
+        <div className={css.totalContainer}>
+          <section className={css.totalColumn} data-testid="total-column">
+            {cartIsReady && (
+              <>
+                <div className={css.cartHeader}>
+                  <h1>Total</h1>
+                </div>
+                <div className={css.priceBreakdown}>
+                  <h3 className={css.subtotal}>
+                    <span className="label">Subtotal </span>
+                    <span className="value">${getSubtotal()}</span>
+                  </h3>
+                  <DeliveryRow />
+                  <select name="delivery-options" id="delivery-options">
+                    <option value="standard">Standard Delivery (Free)</option>
+                    <option value="express">Express ($7)</option>
+                    <option value="overnight">Overnight ($12)</option>
+                  </select>
+                </div>
+                <button type="button">Checkout</button>
+              </>
+            )}
+            <div className={css.payments} data-testid="payments">
+              <h3>We accept:</h3>
+              <img
+                src={paymentsImg}
+                alt="Apple Pay, American Express, VISA, VISA Electron, VISA Debit, VISA Carte Bleue, VISA Electron Carte Bleue, VISA Debit Carte Bleue, VISA Purchasing, Maestro, Mastercard, Debit Mastercard, Discover, Diners Club, PayPal, PayPal Pay in 4, 4 easy payments, Afterpay, Cash App Pay, Gift voucher, Google Pay"
+              />
+              <p>Got a discount code? Add it at the next step</p>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
   );
@@ -79,9 +82,10 @@ export default function Cart() {
 function DeliveryRow() {
   const [showInfo, setShowInfo] = useState(false);
   return (
-    <div className="delivery-row" data-testid="delivery-row">
+    <div className={css.deliveryRow} data-testid="delivery-row">
       <h3>Delivery</h3>
       <button
+        className={css.showInfoBtn}
         type="button"
         aria-label="More Info"
         onClick={() => {
@@ -91,8 +95,15 @@ function DeliveryRow() {
         i
       </button>
       {showInfo && (
-        <div className="popover" role="alert" aria-label="Delivery Information">
-          Shipping options and speeds vary based on your location
+        <div
+          className={css.popover}
+          role="alert"
+          aria-label="Delivery Information"
+        >
+          <div className={css.popoverText}>
+            Shipping options and speeds vary based on your location
+          </div>
+          <div className={css.popoverTail} />
         </div>
       )}
     </div>

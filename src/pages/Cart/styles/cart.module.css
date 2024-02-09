@@ -18,7 +18,7 @@
 }
 
 .cartList {
-  flex: 3;
+  flex: 2;
   min-width: 250px;
   min-height: 250px;
   display: flex;
@@ -27,6 +27,7 @@
 
 .cartHeader {
   padding-bottom: 25px;
+  margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -42,17 +43,110 @@
 
 .emptyCart {
   flex: 1;
-  margin-top: 20px;
   display: grid;
   place-content: center;
   font-size: 1.4rem;
 }
 
+/* ---------------------------------- */
+/* ----------- Cart Items ----------- */
+/* ---------------------------------- */
+
+.subtotal {
+  font-weight: bold;
+  display: flex;
+}
+
+h2.subtotal {
+  align-self: flex-end;
+  gap: 50px;
+  font-size: 1.5rem;
+  color: #3c3c3c;
+}
+
+/* ---------------------------------- */
+/* ---------- Total Column ---------- */
+/* ---------------------------------- */
+
+.totalContainer {
+  flex: 1;
+}
+
 .totalColumn {
-  flex: 2;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.priceBreakdown {
+  border-bottom: 1px solid grey;
+  font-size: 1.1rem;
+}
+
+h3.subtotal {
   justify-content: space-between;
+  text-transform: unset;
+}
+
+.deliveryRow {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.deliveryRow h3 {
+  font-weight: bold;
+  text-transform: unset;
+}
+
+.showInfoBtn {
+  --dim: 30px;
+  width: var(--dim);
+  height: var(--dim);
+
+  border: 1px solid currentColor;
+  border-radius: var(--dim);
+
+  color: #595959;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.popover {
+  --bgc: #efefef;
+  position: absolute;
+  bottom: 25px;
+  right: -20px;
+}
+
+.popoverText {
+  padding: 5px;
+
+  background-color: var(--bgc);
+  border: 1px solid #000;
+  border-radius: 5px;
+
+  font-size: 0.9rem;
+}
+
+.popoverTail {
+  --dim: 20px;
+
+  position: relative;
+  top: -10px;
+  height: var(--dim);
+  width: var(--dim);
+  margin-left: auto;
+  margin-right: 25px;
+
+  background-color: var(--bgc);
+
+  border: 1px solid #000;
+  border-left: none;
+  border-top: none;
+  border-radius: 50% 0 0 0;
+
+  transform: rotate(45deg);
 }
 
 .payments {
