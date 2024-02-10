@@ -9,7 +9,7 @@
 
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 20px;
 }
 
 .cart section {
@@ -18,7 +18,7 @@
 }
 
 .cartList {
-  flex: 2;
+  flex: 1;
   min-width: 250px;
   min-height: 250px;
   display: flex;
@@ -83,7 +83,7 @@ h2.subtotal {
   flex-direction: column;
   gap: 10px;
   border-bottom: 1px solid grey;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 h3.subtotal {
@@ -140,7 +140,7 @@ h3.subtotal {
   height: var(--dim);
   width: var(--dim);
   margin-left: auto;
-  margin-right: 25px;
+  margin-right: 22px;
 
   background-color: var(--bgc);
 
@@ -152,21 +152,32 @@ h3.subtotal {
   transform: rotate(45deg);
 }
 
-.deliveryOptions {
-  appearance: none;
-  padding-left: 2px;
-  border: none;
+.selectWrapper {
+  position: relative;
   color: grey;
-  font-size: 1rem;
 }
 
-.deliveryOptions::after {
-  content: '';
+.selectWrapper::after {
+  position: absolute;
+  right: 2px;
+  top: -6px;
+  content: '^';
+  font-size: 1.5rem;
+  transform: rotate(180deg);
+}
+
+.deliveryOptions {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  border: none;
+  font-size: 1rem;
 }
 
 .checkoutBtn {
   margin: 30px 0;
-  padding: 20px 0;
+  padding: 20px 25px;
 
   background-color: #008e45;
   color: white;
@@ -184,4 +195,10 @@ h3.subtotal {
 
 .payments h3 {
   font-size: 1.3rem;
+}
+
+@media (min-width: 900px) {
+  .cartList {
+    flex: 2;
+  }
 }
