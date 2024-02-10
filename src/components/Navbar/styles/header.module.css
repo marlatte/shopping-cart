@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+.btnContainer {
+  width: 75px;
+}
+
 .btn {
   --dim: 40px;
   width: var(--dim);

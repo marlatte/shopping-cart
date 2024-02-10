@@ -1,7 +1,9 @@
 .cartBtn {
+  width: 75px;
   outline-offset: 8px;
   font-size: 1.1rem;
   font-weight: 300;
+  text-align: right;
 }
 
 .cartBtn:hover {

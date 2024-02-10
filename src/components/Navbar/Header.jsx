@@ -24,17 +24,19 @@ export default function Header({ miniCart }) {
         />
       )}
       <div className={css.content}>
-        <button
-          type="button"
-          aria-label="Menu"
-          className={`open-menu-btn ${css.btn}`}
-          onClick={() => {
-            setMenuOpen(true);
-            setFocusedClassName('.close-menu-btn');
-          }}
-        >
-          <div className={css.symbol}>☰</div>
-        </button>
+        <div className={css.btnContainer}>
+          <button
+            type="button"
+            aria-label="Menu"
+            className={`open-menu-btn ${css.btn}`}
+            onClick={() => {
+              setMenuOpen(true);
+              setFocusedClassName('.close-menu-btn');
+            }}
+          >
+            <div className={css.symbol}>☰</div>
+          </button>
+        </div>
         <HomeLink />
         <CartButton miniCart={miniCart} />
       </div>
