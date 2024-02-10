@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link, useFetcher } from 'react-router-dom';
 import { fetchItem } from '../../utils/fetch-data';
+import css from './styles/cartItem.module.css';
 
 export default function CartItem({ item }) {
   const [product, setProduct] = useState({});
@@ -30,33 +31,33 @@ export default function CartItem({ item }) {
   }
 
   return (
-    <article className="cart-item" data-testid="cart-item">
-      <div className="image-container">
-        <div className="frame">
-          <Link to={`/product/${id}`}>
+    <article className={css.cartItem} data-testid="cart-item">
+      <div className={css.imgContainer}>
+        <div className={css.frame}>
+          <Link className={css.imgLink} to={`/product/${id}`}>
             <img src={product.image} alt={product.title} />
           </Link>
         </div>
       </div>
-      <div className="text">
-        <h3 className="price" aria-label={getPriceAlt()}>
+      <div className={css.text}>
+        <h3 className={css.price} aria-label={getPriceAlt()}>
           ${price}
         </h3>
-        <h4>
+        <h4 className={css.title}>
           <Link to={`/product/${id}`}>{product.title}</Link>
         </h4>
-        <div className="quantity">
-          <quantityFetcher.Form method="post">
-            <button
-              type="submit"
-              name="modifier"
-              value="-1"
-              aria-label="Subtract 1 from quantity"
-            >
-              -
-            </button>
-            <label>
-              Qty.
+        <quantityFetcher.Form method="post">
+          <label className={css.quantity}>
+            Qty.
+            <div className={css.quantityChanger}>
+              <button
+                type="submit"
+                name="modifier"
+                value="-1"
+                aria-label="Subtract 1 from quantity"
+              >
+                –
+              </button>
               <input
                 type="number"
                 min="1"
@@ -66,18 +67,18 @@ export default function CartItem({ item }) {
                   quantityFetcher.submit(e.currentTarget.form);
                 }}
               />
-            </label>
-            <input type="hidden" name="id" value={id} />
-            <button
-              type="submit"
-              name="modifier"
-              value="1"
-              aria-label="Add 1 to quantity"
-            >
-              +
-            </button>
-          </quantityFetcher.Form>
-        </div>
+              <button
+                type="submit"
+                name="modifier"
+                value="1"
+                aria-label="Add 1 to quantity"
+              >
+                +
+              </button>
+            </div>
+          </label>
+          <input type="hidden" name="id" value={id} />
+        </quantityFetcher.Form>
       </div>
       <div className="remove-container">
         <destroyFetcher.Form method="post" action="destroy">

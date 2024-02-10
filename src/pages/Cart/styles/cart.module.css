@@ -52,14 +52,21 @@
 /* ----------- Cart Items ----------- */
 /* ---------------------------------- */
 
+.cartItems > :not(:first-child) {
+  border-top: 1px solid #000;
+}
+
 .subtotal {
-  font-weight: bold;
+  max-width: 100%;
   display: flex;
+  flex-wrap: wrap;
+  font-weight: bold;
 }
 
 h2.subtotal {
   align-self: flex-end;
-  gap: 50px;
+  column-gap: 50px;
+  justify-content: end;
   font-size: 1.5rem;
   color: #3c3c3c;
 }

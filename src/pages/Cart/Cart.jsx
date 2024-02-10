@@ -10,7 +10,9 @@ export default function Cart() {
   const cartIsReady = !!miniCart.length;
 
   function getSubtotal() {
-    return miniCart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+    return miniCart
+      .reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+      .toFixed(2);
   }
 
   return (
@@ -23,14 +25,9 @@ export default function Cart() {
           </div>
           {cartIsReady ? (
             <>
-              <div className="cart-items">
-                {miniCart.map((item, index) => (
-                  <div
-                    className={!index ? css.item : css.firstItem}
-                    key={item.id}
-                  >
-                    <CartItem item={item} />
-                  </div>
+              <div className={css.cartItems}>
+                {miniCart.map((item) => (
+                  <CartItem key={item.id} item={item} />
                 ))}
               </div>
               <h2 className={css.subtotal}>
