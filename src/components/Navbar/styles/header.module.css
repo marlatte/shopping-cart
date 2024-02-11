@@ -43,4 +43,8 @@
     width: min(1300px, 100%);
     margin: auto;
   }
+
+  .btnContainer {
+    width: 115px;
+  }
 }

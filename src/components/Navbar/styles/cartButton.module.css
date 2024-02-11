@@ -13,6 +13,7 @@
 
 @media (min-width: 700px) {
   .cartBtn {
+    width: 115px;
     font-size: 1.4rem;
   }
 }
