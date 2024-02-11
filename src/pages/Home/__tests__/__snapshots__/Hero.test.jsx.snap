@@ -3,24 +3,41 @@
 exports[`matches a snapshot 1`] = `
 <div>
   <section
-    class="hero"
+    class="_hero_518764"
   >
     <div
-      class="text-container"
+      class="_text_518764"
     >
-      <h1>
-        Clothes that are more than just fabric
+      <h1
+        class="_heroHeading_518764"
+      >
+        Clothes that are 
+        <strong>
+          more
+        </strong>
+         than fabric
       </h1>
       <p>
-        Beautiful 'fits that encourage you to get creative
+        Beautiful fits that encourage you to
+         
+        <strong>
+          get creative
+        </strong>
       </p>
       <a
+        class="_btn_518764"
         href="/products/"
       >
-        Shop All Categories
+        Shop 
+        <span
+          class="_btnCaps_518764"
+        >
+          All Categories
+        </span>
       </a>
     </div>
     <a
+      class="_imgLink_518764"
       href="/products/"
     >
       <img

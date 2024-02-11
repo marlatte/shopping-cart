@@ -52,7 +52,7 @@ test('displays fetched price, title, and image for id:1', async () => {
   const title = links[1];
   const image = await screen.findByRole('img');
 
-  expect(price).toHaveTextContent(`$${fakeData.price}`);
+  expect(price).toHaveTextContent(`$ ${fakeData.price.toFixed(2)}`);
   expect(title.href).toMatch(`/product/${fakeData.id}`);
   expect(image.src).toBe(fakeData.image);
   expect(fetch).toHaveBeenCalledWith('https://fakestoreapi.com/products/1');
@@ -70,7 +70,7 @@ test('displays fetched price, title, and image for id:2', async () => {
   const title = links[1];
   const image = await screen.findByRole('img');
 
-  expect(price).toHaveTextContent(`$${fakeData.price}`);
+  expect(price).toHaveTextContent(`$ ${fakeData.price.toFixed(2)}`);
   expect(title.href).toMatch(`/product/${fakeData.id}`);
   expect(image.src).toBe(fakeData.image);
 });
@@ -88,7 +88,7 @@ test('displays quantity setter with +/- buttons', async () => {
 
   expect(+quantity.value).toBe(2);
   expect(plusButton).toHaveTextContent('+');
-  expect(minusButton).toHaveTextContent('-');
+  expect(minusButton).toHaveTextContent('–');
 });
 
 test('displays Remove button with correct product id', async () => {

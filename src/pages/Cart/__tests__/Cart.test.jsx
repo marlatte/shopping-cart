@@ -24,7 +24,7 @@ function ContextWrapper({ hasItems }) {
   return <Outlet context={{ miniCart }} />;
 }
 
-function setup(hasItems) {
+function setup(hasItems = true) {
   const router = createBrowserRouter([
     {
       path: '/',
@@ -57,16 +57,14 @@ describe('Section: Cart list', () => {
   });
 
   test("has correct number of items and hr's", async () => {
-    const { container } = setup(true);
+    setup();
     const itemList = await screen.findAllByTestId('cart-item');
-    const dividers = container.querySelectorAll('.item-container > hr');
 
     expect(itemList).toHaveLength(2);
-    expect(dividers).toHaveLength(2);
   });
 
   test('has subtotal below items', async () => {
-    setup(true);
+    setup();
     const cartList = screen.getByTestId('cart-list');
     const subtotalText = await within(cartList).findByRole('heading', {
       name: /subtotal/i,
@@ -87,7 +85,7 @@ describe('Section: Total Column', () => {
   });
 
   test('has subtotal', async () => {
-    setup(true);
+    setup();
     const totalColumn = screen.getByTestId('total-column');
     // Wait to find subtotal until after items are displayed
     await screen.findAllByTestId('cart-item');

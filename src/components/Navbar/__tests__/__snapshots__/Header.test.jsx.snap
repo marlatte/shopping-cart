@@ -2,32 +2,47 @@
 
 exports[`Matches snapshot for title, mini-cart, and menu button 1`] = `
 <div>
-  <header>
-    <button
-      aria-label="Menu"
-      class="open-menu-btn"
-      type="button"
+  <header
+    class="_stickyHeader_50b275"
+  >
+    <div
+      class="_content_50b275"
     >
-      ☰
-    </button>
-    <a
-      href="/"
-    >
-      <span
-        aria-label="Yuedpao Homepage"
-        class="logo"
-        title="Yuedpao Homepage"
+      <div
+        class="_btnContainer_50b275"
       >
-        Yuedpao
-      </span>
-    </a>
-    <a
-      href="/cart"
-    >
-      Cart (
-      0
-      )
-    </a>
+        <button
+          aria-label="Menu"
+          class="open-menu-btn _btn_50b275"
+          type="button"
+        >
+          <div
+            class="_symbol_50b275"
+          >
+            ☰
+          </div>
+        </button>
+      </div>
+      <a
+        href="/"
+      >
+        <span
+          aria-label="Yuedpao Homepage"
+          class="logo"
+          title="Yuedpao Homepage"
+        >
+          Yuedpao
+        </span>
+      </a>
+      <a
+        class="_cartBtn_2cd961"
+        href="/cart"
+      >
+        Cart (
+        0
+        )
+      </a>
+    </div>
   </header>
 </div>
 `;

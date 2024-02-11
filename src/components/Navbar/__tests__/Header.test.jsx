@@ -21,7 +21,7 @@ function setup(miniCart = fakeCarts.empty) {
 
 test('has 3 children by default: a title, mini-cart, and menu button', () => {
   setup();
-  expect(screen.getByRole('banner').childElementCount).toBe(3);
+  expect(screen.getByRole('banner').children[0].childElementCount).toBe(3);
 });
 
 test('menu button shows 3 bars but is named "menu"', () => {
@@ -41,7 +41,7 @@ test('clicking the menu button opens the NavMenu', async () => {
 
   await user.click(menuBtn);
 
-  expect(screen.getByRole('banner').childElementCount).toBe(5);
+  expect(screen.getByRole('banner').childElementCount).toBe(3);
 });
 
 test('opening the menu shifts focus to the close button', async () => {
@@ -64,7 +64,7 @@ test('clicking the close button closes the NavMenu', async () => {
   const closeBtn = screen.getByRole('button', { name: 'Close Menu' });
   await user.click(closeBtn);
 
-  expect(screen.getByRole('banner').childElementCount).toBe(3);
+  expect(screen.getByRole('banner').childElementCount).toBe(1);
 });
 
 test('closing the menu shifts focus back to the menu button', async () => {
