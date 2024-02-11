@@ -9,7 +9,6 @@ export default async function action({ request }) {
   const newQuant = modifier ? quantity + modifier : quantity;
 
   if (newQuant > 0) {
-    console.log('Updating product ', id, ' to qty: ', newQuant);
     update(id, newQuant);
   }
   return null;
