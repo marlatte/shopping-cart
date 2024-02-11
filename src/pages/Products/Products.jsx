@@ -39,6 +39,12 @@ export default function Products() {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
+  useEffect(() => {
+    document.title = `Yuedpao ${convertToTitleCase(
+      category === 'all' || !category ? 'all products' : category
+    )}`;
+  }, [category]);
+
   return (
     <main className="products">
       <div className={css.mainContent}>

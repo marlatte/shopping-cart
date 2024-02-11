@@ -30,6 +30,12 @@ export default function SingleProduct() {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
+  useEffect(() => {
+    document.title = productIsReady
+      ? `Yuedpao ${product.title}`
+      : `Yuedpao Product ${id}`;
+  }, [productIsReady, product.title, id]);
+
   return (
     <main className="single-product">
       <div className={css.mainContent}>
