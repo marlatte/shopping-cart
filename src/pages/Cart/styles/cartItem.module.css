@@ -1,5 +1,6 @@
 .cartItem {
-  padding: 20px 0;
+  position: relative;
+  padding: 40px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -33,7 +34,7 @@
 }
 
 .price {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
@@ -46,7 +47,8 @@
   --bd-color: #757575;
   display: flex;
   align-items: center;
-  gap: 30px;
+  column-gap: 30px;
+  row-gap: 5px;
   flex-wrap: wrap;
   color: var(--bd-color);
 }
@@ -82,4 +84,18 @@
   text-align: center;
   color: #000;
   box-shadow: inset 0 4px 6px -4px grey;
+}
+
+.removeContainer {
+  position: absolute;
+  right: -15px;
+  top: 22px;
+  background-color: white;
+}
+
+.removeItemBtn {
+  padding: 0 10px;
+
+  font-size: 3rem;
+  color: #757575;
 }

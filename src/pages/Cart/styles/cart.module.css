@@ -9,7 +9,7 @@
 
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: max(20px, 3vw);
 }
 
 .cart section {
@@ -27,7 +27,6 @@
 
 .cartHeader {
   padding-bottom: 25px;
-  margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -52,12 +51,13 @@
 /* ----------- Cart Items ----------- */
 /* ---------------------------------- */
 
-.cartItems > :not(:first-child) {
-  border-top: 1px solid #000;
+.cartItems > article {
+  border-bottom: 1px solid #000;
 }
 
 .subtotal {
   max-width: 100%;
+  padding-top: 20px;
   display: flex;
   flex-wrap: wrap;
   font-weight: bold;

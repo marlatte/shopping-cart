@@ -41,7 +41,7 @@ export default function CartItem({ item }) {
       </div>
       <div className={css.text}>
         <h3 className={css.price} aria-label={getPriceAlt()}>
-          ${price}
+          $ {price.toFixed(2)}
         </h3>
         <h4 className={css.title}>
           <Link to={`/product/${id}`}>{product.title}</Link>
@@ -80,18 +80,21 @@ export default function CartItem({ item }) {
           <input type="hidden" name="id" value={id} />
         </quantityFetcher.Form>
       </div>
-      <div className="remove-container">
-        <destroyFetcher.Form method="post" action="destroy">
-          <button
-            type="submit"
-            name="remove"
-            value={id}
-            aria-label="Remove Item from Cart"
-          >
-            ×
-          </button>
-        </destroyFetcher.Form>
-      </div>
+      <destroyFetcher.Form
+        method="post"
+        action="destroy"
+        className={css.removeContainer}
+      >
+        <button
+          type="submit"
+          name="remove"
+          value={id}
+          aria-label="Remove Item from Cart"
+          className={css.removeItemBtn}
+        >
+          ×
+        </button>
+      </destroyFetcher.Form>
     </article>
   );
 }
