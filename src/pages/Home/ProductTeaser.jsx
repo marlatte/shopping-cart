@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import ProductCard from '../../components/product-displays/ProductCard';
 import css from './styles/productTeaser.module.css';
 import { fetchItems, getRandom3 } from '../../utils/fetch-data';
+import Loading from '../../components/Loading';
 
 export default function ProductTeaser() {
   const [products, setProducts] = useState([]);
@@ -37,10 +38,11 @@ export default function ProductTeaser() {
           Shop <span className={css.jewelryCaps}>jewelry</span>
         </Link>
       </div>
-      {teaserIsReady &&
-        products.map((product) => (
-          <ProductCard key={product.id} data={product} homepage />
-        ))}
+      {teaserIsReady
+        ? products.map((product) => (
+            <ProductCard key={product.id} data={product} homepage />
+          ))
+        : [1, 2, 3].map((num) => <Loading key={num} small />)}
     </section>
   );
 }

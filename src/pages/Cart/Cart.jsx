@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import paymentsImg from '../../assets/payment-methods.png';
 import CartItem from './CartItem';
@@ -14,6 +14,10 @@ export default function Cart() {
       .reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
       .toFixed(2);
   }
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
 
   return (
     <main className={css.cart}>

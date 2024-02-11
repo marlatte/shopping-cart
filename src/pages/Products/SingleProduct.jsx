@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { fetchItem } from '../../utils/fetch-data';
 import { convertToHref, convertToTitleCase } from '../../utils/conversions';
 import ProductInfo from './ProductInfo';
+import Loading from '../../components/Loading';
 import css from './styles/singleProduct.module.css';
 
 export default function SingleProduct() {
@@ -25,10 +26,14 @@ export default function SingleProduct() {
     };
   }, [id]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
+
   return (
     <main className="single-product">
       <div className={css.mainContent}>
-        {productIsReady && (
+        {productIsReady ? (
           <>
             <div className={css.breadcrumbs}>
               <Link to="/products">All Products</Link>
@@ -46,6 +51,8 @@ export default function SingleProduct() {
               <ProductInfo product={product} />
             </section>
           </>
+        ) : (
+          <Loading />
         )}
       </div>
     </main>

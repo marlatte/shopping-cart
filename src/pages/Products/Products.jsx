@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import { fetchItems } from '../../utils/fetch-data';
 import { convertToTitleCase } from '../../utils/conversions';
 import ProductCard from '../../components/product-displays/ProductCard';
+import Loading from '../../components/Loading';
 import css from './styles/products.module.css';
 
 export default function Products() {
@@ -34,6 +35,10 @@ export default function Products() {
     };
   }, [category]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
+
   return (
     <main className="products">
       <div className={css.mainContent}>
@@ -43,8 +48,11 @@ export default function Products() {
           )}
         </h1>
         <div className={css.cardGrid}>
-          {productsAreReady &&
-            products.map((item) => <ProductCard key={item.id} data={item} />)}
+          {productsAreReady ? (
+            products.map((item) => <ProductCard key={item.id} data={item} />)
+          ) : (
+            <Loading />
+          )}
         </div>
       </div>
     </main>

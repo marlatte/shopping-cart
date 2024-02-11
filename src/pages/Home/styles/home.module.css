@@ -99,7 +99,7 @@
 }
 
 @media (min-width: 700px) {
-  .home {
+  .mainContent {
     gap: 100px;
   }
 
