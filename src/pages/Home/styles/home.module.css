@@ -62,12 +62,6 @@
   transition: all 0.5s;
 }
 
-.imgLink:hover,
-.imgLink:focus {
-  box-shadow: 0 0 10px darkgrey;
-  transform: scale(1.01);
-}
-
 .hero img {
   max-width: 100%;
   border: 5px solid black;
@@ -116,5 +110,11 @@
 
   .btn {
     max-width: 240px;
+  }
+
+  .imgLink:hover,
+  .imgLink:focus {
+    box-shadow: 0 0 10px darkgrey;
+    transform: scale(1.01);
   }
 }

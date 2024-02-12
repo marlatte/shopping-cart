@@ -7,12 +7,6 @@
   transition: transform 0.3s;
 }
 
-.productCard a:hover,
-.productCard a:focus {
-  color: #3c3c3c;
-  transform: scale(1.03);
-}
-
 .imgFrame {
   height: 250px;
   padding: 10px;
@@ -40,6 +34,12 @@
 }
 
 @media (min-width: 700px) {
+  .productCard a:hover,
+  .productCard a:focus {
+    color: #3c3c3c;
+    transform: scale(1.03);
+  }
+
   .imgFrame {
     height: 300px;
   }
