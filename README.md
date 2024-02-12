@@ -17,4 +17,4 @@ This project demonstrates my skills with:
 
 Project requirements can be found on [the Odin Project site](https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart).
 
-👉 [Live Demo](#) 👈
+👉 [Live Demo](https://marlatte-shopping-cart.netlify.app/) 👈
