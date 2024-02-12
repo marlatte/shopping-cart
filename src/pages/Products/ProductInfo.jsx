@@ -35,7 +35,7 @@ export default function ProductInfo({ product }) {
         <div className={css.divider} />
         <div className="reviews">{count} reviews</div>
       </div>
-      <p className={css.price} aria-label={`Price: $${price}`}>
+      <p className={css.price} aria-label={`Price: $${price}`} role="article">
         ${price}
       </p>
       <p className={css.description}>{description}</p>

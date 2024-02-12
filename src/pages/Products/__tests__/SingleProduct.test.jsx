@@ -10,7 +10,7 @@ import {
 } from '../../../utils/conversions';
 import allProducts from './allProducts';
 
-const testProduct1 = allProducts[0];
+const testProduct1 = sanitizeProduct(allProducts[0]);
 const testProduct2 = sanitizeProduct(allProducts[1]);
 
 let fakeData;

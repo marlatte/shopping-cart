@@ -17,15 +17,14 @@ function setup() {
 }
 
 test('has a header and paragraph', () => {
-  setup();
-  expect(screen.getByRole('heading').textContent).toMatch(
-    /upgrade your style/i
+  const { container } = setup();
+  const paragraph = container.querySelector('p');
+  const heading = screen.getByRole('heading');
+
+  expect(heading.textContent).toMatch(/upgrade your style/i);
+  expect(paragraph).toHaveTextContent(
+    'Get 15% off your next order by subscribing to our newsletter!'
   );
-  expect(
-    screen.getByText(
-      /Get 15% off your next order by subscribing to our newsletter!/i
-    )
-  ).toBeInTheDocument();
 });
 
 test('has a form with an email input and subscribe button', () => {
@@ -61,7 +60,7 @@ test('shows a toast with submitted email', async () => {
   const user = userEvent.setup();
   setup();
   const subscribeBtn = screen.getByRole('button', { name: /subscribe/i });
-  const input = screen.getByRole('textbox', { name: 'Email' });
+  const input = screen.getByRole('textbox', { name: /email/i });
   const testEmail = 'second@example.com';
 
   input.focus();
@@ -77,7 +76,7 @@ test('shows a toast with submitted email', async () => {
 });
 
 test(
-  'toast goes away after 10 seconds',
+  'toast goes away after 5 seconds',
   async () => {
     const user = userEvent.setup();
     setup();

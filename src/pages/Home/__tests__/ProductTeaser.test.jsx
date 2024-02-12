@@ -1,6 +1,6 @@
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProductTeaser from '../ProductTeaser';
 
 const testProducts = [
@@ -37,27 +37,35 @@ const testProducts = [
   },
 ];
 
+global.fetch = vi.fn(() =>
+  Promise.resolve({ json: () => Promise.resolve(testProducts) })
+);
+
 function setup() {
-  return render(<ProductTeaser products={testProducts} />, {
-    wrapper: BrowserRouter,
-  });
+  const router = createBrowserRouter([
+    { path: '/', element: <ProductTeaser /> },
+  ]);
+
+  return render(<RouterProvider router={router} />);
 }
 
 test('contains a heading, paragraph, and link to jewelry', () => {
   setup();
+  const heading = screen.getByRole('heading', { name: /check out our/i });
+  const paragraph = screen.getByText(/sick threads/i);
 
+  expect(heading).toHaveTextContent(/check out our new arrivals/i);
+  expect(paragraph).toHaveTextContent(
+    /We might be known for our sick threads, but we've also got a sleek selection of jewelry/i
+  );
   expect(
-    screen.getByRole('heading', { name: /check out our new arrivals/i })
-  ).toBeInTheDocument();
-  expect(screen.getByText(/sick threads/i)).toBeInTheDocument();
-  expect(
-    screen.getByRole('link', { name: /shop all jewelry/i })
+    screen.getByRole('link', { name: /shop jewelry/i })
   ).toBeInTheDocument();
 });
 
-test('contains 3 cards', () => {
+test('contains 3 cards', async () => {
   setup();
-  const cards = screen.getAllByTestId(/product card/i);
+  const cards = await screen.findAllByTestId(/product card/i);
 
   expect(cards).toHaveLength(3);
 });

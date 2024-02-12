@@ -12,7 +12,7 @@ test('turns string into Title Case', () => {
 });
 
 test('turns string into href', () => {
-  expect(convertToHref("men's clothing")).toBe('mens-clothing');
+  expect(convertToHref("men's clothing")).toBe('/products/mens-clothing');
 });
 
 test('trims whitespace from product values that are strings', () => {

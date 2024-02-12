@@ -8,13 +8,14 @@ function setup() {
 }
 
 test('has an h1 and paragraph with proper text', () => {
-  setup();
-  expect(screen.getByRole('heading').textContent).toMatch(
-    /clothes that are more than just fabric/i
+  const { container } = setup();
+  const p = container.querySelector('p');
+  const heading = screen.getByRole('heading');
+
+  expect(heading).toHaveTextContent(/clothes that are more than fabric/i);
+  expect(p).toHaveTextContent(
+    /beautiful fits that encourage you to get creative/i
   );
-  expect(
-    screen.getByText(/beautiful 'fits that encourage you to get creative/i)
-  ).toBeInTheDocument();
 });
 
 test('has a text link to all products', () => {

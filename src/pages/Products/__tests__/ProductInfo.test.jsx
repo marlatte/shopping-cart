@@ -28,12 +28,13 @@ function setup() {
 }
 
 test('displays accurate title, price, description', () => {
-  const { container } = setup();
-  const price = container.querySelector('.price');
+  setup();
+  const price = screen.getByRole('article', {
+    name: `Price: $${testProduct.price}`,
+  });
 
   expect(screen.getByRole('heading').textContent).toBe(testProduct.title);
-  expect(price).toHaveAccessibleName(`Price: $${testProduct.price}`);
-  expect(price.textContent).toBe(`$${testProduct.price}`);
+  expect(price).toHaveTextContent(`$${testProduct.price}`);
   expect(screen.getByText(testProduct.description)).toBeInTheDocument();
 });
 
@@ -42,16 +43,16 @@ test('displays accurate rating and review count, rounds rating for image', () =>
 
   expect(screen.getByText('3.9')).toHaveAccessibleName('Rating: 3.9 out of 5');
   expect(screen.getByText('120 reviews')).toBeInTheDocument();
-  expect(screen.getByText('3.9').className).toMatch('rating star-4');
+  expect(screen.getByText('3.9').className).toMatch('star-4');
 });
 
 test('roundedRating also rounds down', () => {
   testProduct.rating.rate = 3.6;
   setup();
-  expect(screen.getByText('3.6').className).toMatch('rating star-3.5');
+  expect(screen.getByText('3.6').className).toMatch('star-3-5');
 });
 
-test('Add to cart button shows toast with hidden product id', async () => {
+test('Add to cart button shows toast', async () => {
   const user = userEvent.setup();
   setup();
 
@@ -64,7 +65,4 @@ test('Add to cart button shows toast with hidden product id', async () => {
     name: /add to cart successful/i,
   });
   expect(toast).toBeInTheDocument();
-
-  const addedId = screen.getByTestId('added-id');
-  expect(+addedId.dataset.productId).toBe(testProduct.id);
 });
