@@ -63,7 +63,6 @@
 }
 
 .hero img {
-  max-width: 100%;
   border: 5px solid black;
 }
 
@@ -72,13 +71,15 @@
 /* ---------------------------------------- */
 
 .articles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   row-gap: 40px;
   column-gap: 20px;
 }
 
 .entry {
+  flex: 1;
+  min-width: 280px;
   display: flex;
   flex-direction: column;
   gap: 16px;
