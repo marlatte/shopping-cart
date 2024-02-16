@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import CartButton from './CartButton';
 import NavMenu from './NavMenu';
 import HomeLink from '../ui/HomeLink';
@@ -7,11 +7,7 @@ import css from './styles/header.module.css';
 
 export default function Header({ miniCart }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [focusedClassName, setFocusedClassName] = useState('none');
-
-  useEffect(() => {
-    document.querySelector(focusedClassName)?.focus();
-  }, [focusedClassName]);
+  const openMenuRef = useRef(null);
 
   return (
     <header className={css.stickyHeader}>
@@ -19,7 +15,7 @@ export default function Header({ miniCart }) {
         <NavMenu
           onClick={() => {
             setMenuOpen(false);
-            setFocusedClassName('.open-menu-btn');
+            openMenuRef.current.focus();
           }}
         />
       )}
@@ -29,9 +25,9 @@ export default function Header({ miniCart }) {
             type="button"
             aria-label="Menu"
             className={`open-menu-btn ${css.btn}`}
+            ref={openMenuRef}
             onClick={() => {
               setMenuOpen(true);
-              setFocusedClassName('.close-menu-btn');
             }}
           >
             <div className={css.symbol}>☰</div>

@@ -1,8 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useEffect, useRef } from 'react';
 import css from './styles/navMenu.module.css';
 
 export default function NavMenu({ onClick }) {
+  const closeMenuRef = useRef(null);
+
+  useEffect(() => {
+    closeMenuRef.current.focus();
+  }, []);
+
   const linkData = [
     ['Home', '/'],
     ['Women', '/products/women'],
@@ -18,6 +25,7 @@ export default function NavMenu({ onClick }) {
           type="button"
           aria-label="Close Menu"
           className={`close-menu-btn ${css.menuBtn}`}
+          ref={closeMenuRef}
           onClick={onClick}
         >
           <div className={css.symbol}>
