@@ -1,8 +1,12 @@
 # Shopping Cart: Yuedpao
 
-A mock e-commerce website built with React. Site design inspired by Conor Marlatt's wireframe for Thai clothing company Yuedpao.
+A mock e-commerce website inspired by Conor Marlatt's wireframe for Thai clothing company Yuedpao.
 
-This project demonstrates my skills with:
+## Demo
+
+👉 [Live Preview](https://marlatte-shopping-cart.netlify.app/) 👈
+
+## Skills Demonstrated
 
 - Single-Page Applications with React Router
   - v6 data APIs
@@ -15,6 +19,11 @@ This project demonstrates my skills with:
 - Fetching data in React from FakeStore API
 - Styling with CSS Modules
 
-Project requirements can be found on [the Odin Project site](https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart).
+## Acknowledgements
 
-👉 [Live Demo](https://marlatte-shopping-cart.netlify.app/) 👈
+- [The Odin Project](https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart)
+- [Conor Marlatt](https://www.linkedin.com/in/conormarlatt/)
+
+## Built with
+
+[![My Skills](https://skillicons.dev/icons?i=remix,react,js,vite,vitest,netlify,css)](https://skillicons.dev)
