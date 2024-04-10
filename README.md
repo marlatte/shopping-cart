@@ -8,14 +8,16 @@ A mock e-commerce website inspired by Conor Marlatt's wireframe for Thai clothin
 
 ## Skills Demonstrated
 
-- Single-Page Applications with React Router
+- Single-Page Applications with `react-router-dom`
   - v6 data APIs
   - Actions & data submission
   - Loaders & url-based components
   - Error catching
   - Fetchers & optimistic UI
   - Outlet Context
-- React testing with `vitest` and `@testing-library/react`
+- Test-Driven Development (TDD) in React
+  - `vitest`
+  - `@testing-library/react`
 - Fetching data in React from FakeStore API
 - Styling with CSS Modules
 
